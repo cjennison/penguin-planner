@@ -25,6 +25,44 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <script src="https://ngld.github.io/OverlayPlugin/assets/shared/common.min.js"></script>
+    <script>
+
+      document.addEventListener("onOverlayStateUpdate", function(e) {
+        console.log("onOverlayStateUpdate", e)
+
+        var event = new CustomEvent("onStateUpdate", { detail: e.detail })
+        document.dispatchEvent(event)
+      });
+
+      addOverlayListener("CombatData", (e) => update(e));
+      addOverlayListener("LogLine", (e) => onLogLine(e));
+      addOverlayListener("ChangePrimaryPlayer", (e) => onPlayerData(e));
+      addOverlayListener("PartyChanged", (e) => onPartyChange(e));
+
+      startOverlayEvents();
+
+      function onLogLine(data) {
+        var event = new CustomEvent("onLogLine", { detail: data })
+        document.dispatchEvent(event)
+      }
+
+      function update(data) {
+        var event = new CustomEvent("onCombatData", { detail: data })
+        document.dispatchEvent(event)
+      }
+
+      function onPlayerData(data) {
+        var event = new CustomEvent("onPlayerData", { detail: data })
+        document.dispatchEvent(event)
+      }
+
+      function onPartyChange(data) {
+        var event = new CustomEvent("onPartyChange", { detail: data })
+        document.dispatchEvent(event)
+      }
+      
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
