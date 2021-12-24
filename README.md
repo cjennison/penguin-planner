@@ -9,10 +9,14 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Create a new OverlayPlugin Overlay and select Custom.
+
+Add [http://localhost:3000](http://localhost:3000) to the URL for the Overlay to view it in ACT.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+The application does not remove event listeners on subsequent hot reloads. Reloading the OverlayPlugin is the best way to be sure that changes are loaded correctly.
 
 ### `npm test`
 
