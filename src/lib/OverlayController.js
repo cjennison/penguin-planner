@@ -30,7 +30,7 @@ const OverlayController = () => {
     })
 
     document.addEventListener("onCombatData", (e) => {
-      console.log("onCombatData", e)
+        console.log("onCombatData", e)
 
       if (e.detail.isActive === "false") {
         dispatch(clearPlayerActions())
@@ -38,7 +38,7 @@ const OverlayController = () => {
     })
 
     document.addEventListener("onStateUpdate", (e) => {
-      console.log("onStateUpdate", e)
+        console.log("onStateUpdate", e)
 
       const payload = e.detail
       if (payload.isLocked === false || payload.isLocked === true) {

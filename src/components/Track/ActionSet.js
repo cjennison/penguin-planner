@@ -8,17 +8,18 @@ import ActionImages from '../../lib/ActionImages'
 import { MagicalRangedActions, UniversalActions } from '../../lib/ActionSpecifications'
 
 const Container = styled.div`
+  display: inline-flex;
   position: absolute;
 
   ${(props => {
     if(props.type === 'player') {
       return `
-        top: -7px;
-        left: 27px;
+        margin-top: -8px;
+        margin-left: 8px;
       `
     }
 
-    return 'top: 0;'
+    return null
   })}
 `
 
@@ -79,13 +80,18 @@ const ActionSet = ({
               console.warn('missing action', formattedActionName)
             }
 
+            let displayType = action.type
+            if (guidedAction && failedActionMatch) {
+              displayType = guidedAction.type
+            }
+
             return (
               <Action
                 altText={formattedActionName}
                 index={i}
                 image={image}
                 key={`${i} - ${action.name}`}
-                type={action.type}
+                type={displayType}
                 success={successfulActionMatch}
                 failure={failedActionMatch}
               />

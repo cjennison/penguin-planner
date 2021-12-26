@@ -5,6 +5,7 @@ export const systemSlice = createSlice({
     initialState: {
       locked: false,
       clickthrough: false,
+      editMode: false,
       track: {
         x: 0,
         y: 0,
@@ -24,9 +25,33 @@ export const systemSlice = createSlice({
       setClickthrough: (state, action) => {
         state.clickthrough = action.payload.clickthrough
       },
+
+      setEditMode: (state, action) => {
+        state.editMode = action.payload.editMode
+      },
+
+      setTrackState: (state, action) => {
+        state.track = {
+          ...state.track,
+          ...action.payload.track,
+        }
+      },
+
+      setToolbarState: (state, action) => {
+        state.toolbar = {
+          ...state.toolbar,
+          ...action.payload.toolbar,
+        }
+      }
     }
   })
 
-export const { setLocked, setClickthrough } = systemSlice.actions
+export const { 
+  setLocked, 
+  setClickthrough, 
+  setTrackState, 
+  setToolbarState,
+  setEditMode,
+} = systemSlice.actions
 
 export default systemSlice.reducer

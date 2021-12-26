@@ -6,22 +6,23 @@ import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { ACTION_TYPES } from '../../lib/IDConstants'
 
 const ActionWidth = 40
-const oGCDActionWidth = 30
-const margin = 3
+const ActionSpacing = 3;
+const oGCDActionWidth = 40
+const margin = 1
 
 const ActionBox = styled.div`
   height: ${props => props.type === ACTION_TYPES.GCD ? ActionWidth : oGCDActionWidth}px;
   width: ${props => props.type === ACTION_TYPES.GCD ? ActionWidth : oGCDActionWidth}px;
-  position: absolute;
+  position: relative;
 
-  top: ${(props) => props.type === ACTION_TYPES.GCD ? "40vh" : "25vh"};
-  left: ${(props) => `${props.index * (ActionWidth + margin)}px`};
+  top: ${(props) => props.type === ACTION_TYPES.GCD ? "10px" : "-15px"};
+  left: ${(props) => `${props.index * (ActionSpacing + margin)}px`};
 `
 
 const SuccessContainer = styled.div`
   position: relative;
-  top: -${(props) => props.type === ACTION_TYPES.GCD ? ActionWidth+15 : oGCDActionWidth+15}px;
-  left: ${(props) => props.type === ACTION_TYPES.GCD ? ActionWidth-10 : oGCDActionWidth-10}px;
+  top: -50px;
+  left: 15px;
 `
 
 const Action = ({

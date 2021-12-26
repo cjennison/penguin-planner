@@ -12,11 +12,9 @@ import reportWebVitals from './reportWebVitals';
 const store = configureStore({ reducer: rootReducer })
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 
