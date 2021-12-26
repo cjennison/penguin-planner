@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addPlayerAction, clearPlanActions, clearPlayerActions, getPlayerFulfilled, hidePlan, showPlan } from '../store/game/reducers'
+import { addPlayerAction, clearPlanActions, clearPlayerActions, getPlayerFulfilled } from '../store/game/reducers'
 import { selectPlanActions, selectPlayerActions } from '../store/game/selectors'
 import { setLocked } from '../store/system/reducers'
 import ActionReader from './ActionReader'
@@ -16,7 +16,6 @@ const OverlayController = () => {
       setTimeout(() => {
         dispatch(clearPlanActions())
         dispatch(clearPlayerActions())
-        dispatch(hidePlan())
       }, 2000)
     }
   }, [playerActions])
@@ -35,7 +34,6 @@ const OverlayController = () => {
 
       if (e.detail.isActive === "false") {
         dispatch(clearPlayerActions())
-        dispatch(showPlan())
       }
     })
 

@@ -1,13 +1,13 @@
 import './App.css'
 import OverlayController from '../../lib/OverlayController'
-import PlayerActionList from '../PlayerActionList'
+import Track from '../Track'
 import Resize from '../Resize'
 
 function App() {
   return (
     <div className="App">
       <OverlayController />
-      <PlayerActionList />
+      <Track />
       <Resize />
     </div>
   );

@@ -2,12 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useSelector } from 'react-redux'
-import { selectPlanActions, selectPlanName, selectPlanState, selectPlayer, selectPlayerActions, selectPlayerJob } from '../../store/game/selectors'
+import { selectPlanActions, selectPlanName, selectPlayer, selectPlayerActions, selectPlayerJob, selectTrackState } from '../../store/game/selectors'
 
 import Tools from './Tools'
 import JobImage from '../../lib/JobImage'
 import { JobIds } from '../../lib/IDConstants'
 import ActionSet from './ActionSet'
+import SupportedJobs from '../../lib/SupportedJobs'
 
 const ListContainer = styled.div`
   text-align: left;
@@ -16,7 +17,7 @@ const ListContainer = styled.div`
 
 const TrackContainer = styled.div`
   ${(props) => {
-    if (!props.showPlan) {
+    if (!props.showTrack) {
       return 'display: none;'
     }
   }}
@@ -53,41 +54,45 @@ const TitleContainer = styled.div`
   left: 0;
 `
 
-const PlayerActionList = () => {
+const Track = () => {
   const playerActions = useSelector(selectPlayerActions)
   const planActions = useSelector(selectPlanActions)
   const planName = useSelector(selectPlanName)
 
-  const showPlan = useSelector(selectPlanState)
+  const showTrack = useSelector(selectTrackState)
 
   const player = useSelector(selectPlayer)
   const playerJob = useSelector(selectPlayerJob)
 
   const currentJobImage = player ? JobImage[playerJob] : null
+  const jobSupported = player ? SupportedJobs[playerJob] : false
 
   return (
     <ListContainer>
       <Tools />
-      <TrackContainer showPlan={showPlan}>
-        <TitleContainer>
-          <ImageContainer>
-            { currentJobImage ?  (<img src={currentJobImage} alt={JobIds[player.Job]} width="35" />) : null }
-          </ImageContainer>
-          <TextContainer>{planName}</TextContainer>
-        </TitleContainer>
-        
-
-        <TrackTop />
-        <TrackBottom />
-
-        <ActionContainer>
-          <ActionSet actions={planActions} performedActions={playerActions} type="plan" />
-          <ActionSet actions={playerActions} guidingActions={planActions} type="player" />
-        </ActionContainer>
-      </TrackContainer>
-     
+      {
+        jobSupported ? (
+          <TrackContainer showTrack={showTrack}>
+            <TitleContainer>
+              <ImageContainer>
+                { currentJobImage ?  (<img src={currentJobImage} alt={JobIds[player.Job]} width="35" />) : null }
+              </ImageContainer>
+              <TextContainer>{planName}</TextContainer>
+            </TitleContainer>
+          
+  
+            <TrackTop />
+            <TrackBottom />
+    
+            <ActionContainer>
+              <ActionSet actions={planActions} performedActions={playerActions} type="plan" />
+              <ActionSet actions={playerActions} guidingActions={planActions} type="player" />
+            </ActionContainer>
+          </TrackContainer>
+        ) : null
+      }
     </ListContainer>
   ) 
 }
 
-export default PlayerActionList
+export default Track

@@ -7,11 +7,10 @@ export const gameSlice = createSlice({
       playerActions: [],
       planActions: [],
       planName: null,
-      showPlan: true,
+      showTrack: true,
     },
     reducers: {
       getPlayerFulfilled: (state, action) => {
-        console.log(action)
         state.player = action.payload.player
       },
 
@@ -34,14 +33,12 @@ export const gameSlice = createSlice({
         state.planName = null
       },
 
-      showPlan: (state) => {
-        console.log("show")
-        state.showPlan = true
+      showTrack: (state) => {
+        state.showTrack = true
       },
 
-      hidePlan: (state) => {
-        console.log('hide')
-        state.showPlan = false
+      hideTrack: (state) => {
+        state.showTrack = false
       },
     }
   })
@@ -52,8 +49,8 @@ export const {
   clearPlayerActions, 
   loadPlanActions,
   clearPlanActions,
-  showPlan,
-  hidePlan,
+  showTrack,
+  hideTrack,
 } = gameSlice.actions
 
 export default gameSlice.reducer

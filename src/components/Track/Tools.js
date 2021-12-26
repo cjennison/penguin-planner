@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faRecordVinyl } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faRecordVinyl, faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { selectWindowAllowClickthrough } from '../../store/system/selectors'
-import { clearPlayerActions, loadPlanActions, clearPlanActions, showPlan, hidePlan } from '../../store/game/reducers'
+import { clearPlayerActions, loadPlanActions, clearPlanActions, showTrack, hideTrack } from '../../store/game/reducers'
 
 import PHASES from '../../lib/phases'
-import { selectPlayerJob } from '../../store/game/selectors'
+import { selectPlayerJob, selectTrackState } from '../../store/game/selectors'
 
 const ToolContainer = styled.div`
   position: absolute;
@@ -38,6 +38,7 @@ const ToolButtonContainer = styled.div`
 const Tools = () => {
   const dispatch = useDispatch()
   const clickthroughEnabled = useSelector(selectWindowAllowClickthrough)
+  const showTrackState = useSelector(selectTrackState)
   const playerJob = useSelector(selectPlayerJob)
 
   if (clickthroughEnabled) return null
@@ -46,16 +47,24 @@ const Tools = () => {
     <ToolContainer>
       <div style={{flex: 1}} />
       <ToolButtonContainer onClick={() => {
+        if (!showTrackState) {
+          dispatch(showTrack())
+        } else {
+          dispatch(hideTrack())
+        }
+      }}>
+        <FontAwesomeIcon icon={showTrackState ? faMinusCircle : faPlusCircle} />
+      </ToolButtonContainer>
+      <ToolButtonContainer onClick={() => {
         const opener = PHASES[playerJob].OPENER
         dispatch(loadPlanActions({ actions: opener, planName: "opener" }))
-        dispatch(showPlan())
+        dispatch(showTrack())
       }}>
         <FontAwesomeIcon icon={faRecordVinyl} />
       </ToolButtonContainer>
       <ToolButtonContainer onClick={() => {
         dispatch(clearPlayerActions())
         dispatch(clearPlanActions())
-        dispatch(hidePlan())
       }}>
         <FontAwesomeIcon icon={faTrashAlt} />
       </ToolButtonContainer>

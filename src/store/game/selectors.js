@@ -37,9 +37,9 @@ export const selectPlayerJob = createSelector(
   }
 )
 
-export const selectPlanState = createSelector(
+export const selectTrackState = createSelector(
   (state) => state.game,
   (game) => {
-    return game.showPlan
+    return game.showTrack
   }
 )

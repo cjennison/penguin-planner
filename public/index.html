@@ -29,8 +29,6 @@
     <script>
 
       document.addEventListener("onOverlayStateUpdate", function(e) {
-        console.log("onOverlayStateUpdate", e)
-
         var event = new CustomEvent("onStateUpdate", { detail: e.detail })
         document.dispatchEvent(event)
       });

@@ -5,6 +5,16 @@ export const systemSlice = createSlice({
     initialState: {
       locked: false,
       clickthrough: false,
+      track: {
+        x: 0,
+        y: 0,
+        width: 400,
+        height: 200
+      },
+      toolbar: {
+        x: 0,
+        y: 0,
+      },
     },
     reducers: {
       setLocked: (state, action) => {

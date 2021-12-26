@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Installation
+## Prerequisites
+Install Node version v16.13.1 [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Run `npm install` from the bash terminal of your choice.
 
 ## Available Scripts
 

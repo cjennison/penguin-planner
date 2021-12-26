@@ -33,6 +33,7 @@ const ActionSet = ({
 
   const actionImages = player ? ActionImages[playerJob] : {}
   const magicalRangedActions = ActionImages.MAGICAL_RANGED
+
   return (
     <Container type={type}>
       {
@@ -63,7 +64,7 @@ const ActionSet = ({
             let image = null
             switch (actionType) {
               case 'job':
-                image = actionImages[`${formattedActionName}.png`]
+                image = actionImages && actionImages[`${formattedActionName}.png`]
                 break;
               case 'magicalRanged':
                 image = magicalRangedActions[`${formattedActionName}.png`]
