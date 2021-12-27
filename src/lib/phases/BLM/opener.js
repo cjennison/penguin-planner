@@ -1,37 +1,38 @@
-import Action from "../../Action"
 import { ACTION_TYPES } from "../../IDConstants"
 
 const opener = []
 
-opener.push(new Action("Sharpcast", ACTION_TYPES.oGCD))
-opener.push(new Action("Fire III", ACTION_TYPES.GCD))
+opener.push({ name:"Sharpcast", type: ACTION_TYPES.oGCD })
+opener.push({ name:"Fire III", type: ACTION_TYPES.GCD })
 
 //  Pull
 
-opener.push(new Action("Thunder III", ACTION_TYPES.GCD))
-opener.push(new Action("Triplecast", ACTION_TYPES.oGCD))
+opener.push({ name:"Thunder III", type: ACTION_TYPES.GCD })
+opener.push({ name:"Triplecast", type: ACTION_TYPES.oGCD })
 
-opener.push(new Action("Fire IV", ACTION_TYPES.GCD))
-opener.push(new Action("Fire IV", ACTION_TYPES.GCD))
+opener.push({ name:"Fire IV", type: ACTION_TYPES.GCD })
+opener.push({ name:"Tincture of Intelligence", type: ACTION_TYPES.CONSUMABLE })
 
-opener.push(new Action("Amplifier", ACTION_TYPES.oGCD))
-opener.push(new Action("Ley Lines", ACTION_TYPES.oGCD))
+opener.push({ name:"Fire IV", type: ACTION_TYPES.GCD })
 
-opener.push(new Action("Fire IV", ACTION_TYPES.GCD))
-opener.push(new Action("Swiftcast", ACTION_TYPES.oGCD))
-opener.push(new Action("Fire IV", ACTION_TYPES.GCD))
-opener.push(new Action("Triplecast", ACTION_TYPES.oGCD))
+opener.push({ name:"Amplifier", type: ACTION_TYPES.oGCD })
+opener.push({ name:"Ley Lines", type: ACTION_TYPES.oGCD })
 
-opener.push(new Action("Despair", ACTION_TYPES.GCD))
-opener.push(new Action("Manafont", ACTION_TYPES.oGCD))
-opener.push(new Action("Fire IV", ACTION_TYPES.GCD))
-opener.push(new Action("Sharpcast", ACTION_TYPES.oGCD))
-opener.push(new Action("Despair", ACTION_TYPES.GCD))
+opener.push({ name:"Fire IV", type: ACTION_TYPES.GCD })
+opener.push({ name:"Swiftcast", type: ACTION_TYPES.oGCD })
+opener.push({ name:"Fire IV", type: ACTION_TYPES.GCD })
+opener.push({ name:"Triplecast", type: ACTION_TYPES.oGCD })
 
-opener.push(new Action("Blizzard III", ACTION_TYPES.GCD))
-opener.push(new Action("Xenoglossy", ACTION_TYPES.GCD))
-opener.push(new Action("Paradox", ACTION_TYPES.GCD))
-opener.push(new Action("Blizzard IV", ACTION_TYPES.GCD))
-opener.push(new Action("Thunder III", ACTION_TYPES.GCD))
+opener.push({ name:"Despair", type: ACTION_TYPES.GCD })
+opener.push({ name:"Manafont", type: ACTION_TYPES.oGCD })
+opener.push({ name:"Fire IV", type: ACTION_TYPES.GCD })
+opener.push({ name:"Sharpcast", type: ACTION_TYPES.oGCD })
+opener.push({ name:"Despair", type: ACTION_TYPES.GCD })
 
-export default opener.map(o => o.toJson())
+opener.push({ name:"Blizzard III", type: ACTION_TYPES.GCD })
+opener.push({ name:"Xenoglossy", type: ACTION_TYPES.GCD })
+opener.push({ name:"Paradox", type: ACTION_TYPES.GCD })
+opener.push({ name:"Blizzard IV", type: ACTION_TYPES.GCD })
+opener.push({ name:"Thunder III", type: ACTION_TYPES.GCD })
+
+export default opener

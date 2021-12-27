@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import Action from './Action'
-import { selectPlayer, selectPlayerJob } from '../../store/game/selectors'
+import { selectConfiguration, selectPlayer, selectPlayerJob } from '../../store/game/selectors'
 import ActionImages from '../../lib/ActionImages'
-import { MagicalRangedActions, UniversalActions } from '../../lib/ActionSpecifications'
+import { MagicalRangedActions, UniversalActions, ItemActions } from '../../lib/ActionSpecifications'
 
 const Container = styled.div`
   display: inline-flex;
@@ -31,9 +31,11 @@ const ActionSet = ({
 }) => {
   const player = useSelector(selectPlayer)
   const playerJob = useSelector(selectPlayerJob)
+  const configuration = useSelector(selectConfiguration)
 
   const actionImages = player ? ActionImages[playerJob] : {}
-  const magicalRangedActions = ActionImages.MAGICAL_RANGED
+  const magicalRangedImages = ActionImages.MAGICAL_RANGED
+  const itemImages = ActionImages.ITEM
 
   return (
     <Container type={type}>
@@ -62,13 +64,20 @@ const ActionSet = ({
               actionType = "universal"
             }
 
+            if (ItemActions.includes(action.name)) {
+              actionType = "item"
+            }
+
             let image = null
             switch (actionType) {
               case 'job':
                 image = actionImages && actionImages[`${formattedActionName}.png`]
                 break;
               case 'magicalRanged':
-                image = magicalRangedActions[`${formattedActionName}.png`]
+                image = magicalRangedImages[`${formattedActionName}.png`]
+                break;
+              case 'item':
+                image = itemImages[`${formattedActionName}.png`]
                 break;
               case 'universal':
               default:

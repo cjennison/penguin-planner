@@ -4,6 +4,11 @@ import BLMActionTypes from "./actions/BLM/types"
 
 const UniversalActions = {
   "Sprint": ACTION_TYPES.GCD,
+  "Tincture of Intelligence": ACTION_TYPES.CONSUMABLE,
+  "Tincture of Strength": ACTION_TYPES.CONSUMABLE,
+  "Tincture of Mind": ACTION_TYPES.CONSUMABLE,
+  "Tincture of Dexterity": ACTION_TYPES.CONSUMABLE,
+  "Orange Juice": ACTION_TYPES.CONSUMABLE,
 }
 
 const MagicalRangedActions = {

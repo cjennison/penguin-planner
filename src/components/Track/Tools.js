@@ -1,24 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
+import Popover from '@mui/material/Popover'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faRecordVinyl, faMinusCircle, faPlusCircle, faBorderAll, faBorderNone } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faRecordVinyl, faMinusCircle, faPlusCircle, faBorderAll, faBorderNone, faCogs } from '@fortawesome/free-solid-svg-icons'
 
 import Draggable from 'react-draggable'
 
-import { selectEditMode, selectToolbarWindowState, selectTrackWindowState, selectWindowAllowClickthrough } from '../../store/system/selectors'
+import { selectEditMode, selectToolbarWindowState, selectWindowAllowClickthrough } from '../../store/system/selectors'
 import { clearPlayerActions, loadPlanActions, clearPlanActions, showTrack, hideTrack } from '../../store/game/reducers'
 
 import PHASES from '../../lib/phases'
 import { selectPlayerJob, selectTrackState } from '../../store/game/selectors'
 import { setEditMode, setToolbarState } from '../../store/system/reducers'
 import ItemResizer from './ItemResizer'
+import Configuration from '../Configuration'
 
 const ToolContainer = styled.div`
   height: 25px;
-  width: 160px;
+  width: 200px;
 `
 
 const ToolButtonContainer = styled.div`
@@ -26,9 +28,7 @@ const ToolButtonContainer = styled.div`
   top: 5px;
 `
 
-const Tools = ({
-
-}) => {
+const Tools = () => {
   const dispatch = useDispatch()
   const clickthroughEnabled = useSelector(selectWindowAllowClickthrough)
   const showTrackState = useSelector(selectTrackState)
@@ -36,78 +36,105 @@ const Tools = ({
   const editMode = useSelector(selectEditMode)
   const toolbarWindowState = useSelector(selectToolbarWindowState)
 
+  const [configAnchorEl, setConfigAnchorEl] = useState(null)
+
   if (clickthroughEnabled) return null
 
-  return (
-    <Draggable
-        bounds="parent"
-        disabled={!editMode}
-        defaultPosition={{ x: toolbarWindowState.x, y: toolbarWindowState.y }}
-        onStop={(e, d) => {
-          dispatch(setToolbarState({ toolbar: { x: d.x, y: d.y } }))
-        }}
-    >
-    <ToolContainer
-        position={toolbarWindowState}
-    > 
-      
-      <ItemResizer 
-          enabled={editMode} 
-          targetType="toolbar"
-      />
+  const configOpen = Boolean(configAnchorEl)
 
-      <ToolButtonContainer>
-        <ButtonGroup 
-          variant="text" 
-          aria-label="text button group"
-        >
-          <Button
-              onClick={() => {
-                if (!showTrackState) {
-                  dispatch(showTrack())
-                } else {
-                  dispatch(hideTrack())
-                }
-              }}
-          >
-            <FontAwesomeIcon icon={showTrackState ? faMinusCircle : faPlusCircle} />
-          </Button>
-          <Button 
-              onClick={() => {
-                const jobPhases = PHASES[playerJob]
-                if (!jobPhases) return
+  return (
+    <>
+      <Draggable
+          bounds="parent"
+          disabled={!editMode}
+          defaultPosition={{ x: toolbarWindowState.x, y: toolbarWindowState.y }}
+          onStop={(e, d) => {
+            dispatch(setToolbarState({ toolbar: { x: d.x, y: d.y } }))
+          }}
+      >
+        <ToolContainer
+            position={toolbarWindowState}
+        > 
+          
+          <ItemResizer 
+              enabled={editMode} 
+              targetType="toolbar"
+          />
+
+          <ToolButtonContainer>
+            <ButtonGroup 
+              variant="text" 
+              aria-label="text button group"
+            >
+              <Button
+                  onClick={() => {
+                    if (!showTrackState) {
+                      dispatch(showTrack())
+                    } else {
+                      dispatch(hideTrack())
+                    }
+                  }}
+              >
+                <FontAwesomeIcon icon={showTrackState ? faMinusCircle : faPlusCircle} />
+              </Button>
+              <Button 
+                  onClick={() => {
+                    const jobPhases = PHASES[playerJob]
+                    if (!jobPhases) return
+            
+                    const opener = PHASES[playerJob].OPENER
+                    dispatch(loadPlanActions({ actions: opener, planName: "opener" }))
+                    dispatch(showTrack())
+                  }}
+              >
+                <FontAwesomeIcon icon={faRecordVinyl} />
+              </Button>
+              <Button
+                  onClick={() => {
+                    if (!editMode) {
+                      dispatch(setEditMode({ editMode: true }))
+                    } else {
+                      dispatch(setEditMode({ editMode: false }))
+                    }
+                  }}
+              >
+                <FontAwesomeIcon icon={!editMode ? faBorderAll : faBorderNone} />
+              </Button>
+              <Button
+                  onClick={() => {
+                    dispatch(clearPlayerActions())
+                    dispatch(clearPlanActions())
+                  }}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </Button>
+              <Button
+                  onClick={(e) => {
+                    setConfigAnchorEl(e.currentTarget)
+                  }}
+              >
+                <FontAwesomeIcon icon={faCogs} />
+              </Button>
+            </ButtonGroup>
+          </ToolButtonContainer>
         
-                const opener = PHASES[playerJob].OPENER
-                dispatch(loadPlanActions({ actions: opener, planName: "opener" }))
-                dispatch(showTrack())
-              }}
-          >
-            <FontAwesomeIcon icon={faRecordVinyl} />
-          </Button>
-          <Button
-              onClick={() => {
-                if (!editMode) {
-                  dispatch(setEditMode({ editMode: true }))
-                } else {
-                  dispatch(setEditMode({ editMode: false }))
-                }
-              }}
-          >
-            <FontAwesomeIcon icon={!editMode ? faBorderAll : faBorderNone} />
-          </Button>
-          <Button
-              onClick={() => {
-                dispatch(clearPlayerActions())
-                dispatch(clearPlanActions())
-              }}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </Button>
-        </ButtonGroup>
-      </ToolButtonContainer>
-     
-    </ToolContainer>
-    </Draggable>
+        </ToolContainer>
+      </Draggable>
+      <Popover
+          id="configPopover"
+          open={configOpen}
+          anchorEl={configAnchorEl}
+          onClose={() => {
+            setConfigAnchorEl(null)
+          }}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+        >
+          <Configuration onClose={() => setConfigAnchorEl(null)} />
+        </Popover>
+    </>
   )
 }
 

@@ -1,16 +1,28 @@
 import { createSelector } from 'reselect'
-import { JobIds } from '../../lib/IDConstants'
+import { ACTION_TYPES, JobIds } from '../../lib/IDConstants'
 
 export const selectPlayerActions = createSelector(
   (state) => state.game,
-  (game) =>
-    game.playerActions || []
+  (game) => {
+    const actions = game.playerActions || []
+
+    return actions.filter(a => {
+      if (a.type === ACTION_TYPES.CONSUMABLE && !game.configuration.enableConsumables) return false
+      return true
+    })
+  }
 )
 
 export const selectPlanActions = createSelector(
   (state) => state.game,
-  (game) =>
-    game.planActions || []
+  (game) =>{
+    const actions = game.planActions || []
+
+    return actions.filter(a => {
+      if (a.type === ACTION_TYPES.CONSUMABLE && !game.configuration.enableConsumables) return false
+      return true
+    })
+  }
 )
 
 export const selectPlanName = createSelector(
@@ -41,5 +53,13 @@ export const selectTrackState = createSelector(
   (state) => state.game,
   (game) => {
     return game.showTrack
+  }
+)
+
+
+export const selectConfiguration = createSelector(
+  (state) => state.game,
+  (game) => {
+    return game.configuration
   }
 )

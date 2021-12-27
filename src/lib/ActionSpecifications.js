@@ -1,5 +1,6 @@
 export const UniversalActions = [
   "Sprint",
+  "Teleport",
 ]
 
 export const MagicalRangedActions = [
@@ -8,4 +9,12 @@ export const MagicalRangedActions = [
   "Surecast",
   "Addle",
   "Sleep"
+]
+
+export const ItemActions = [
+  "Tincture of Intelligence",
+  "Tincture of Mind",
+  "Tincture of Strength",
+  "Tincture of Dexterity",
+  "Orange Juice",
 ]

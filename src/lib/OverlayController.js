@@ -12,7 +12,7 @@ const OverlayController = () => {
   const playerActions = useSelector(selectPlayerActions)
 
   useEffect(() => {
-    if (planActions.length && playerActions.length === planActions.length) {
+    if (planActions.length && playerActions.length >= planActions.length) {
       setTimeout(() => {
         dispatch(clearPlanActions())
         dispatch(clearPlayerActions())

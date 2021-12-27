@@ -8,6 +8,9 @@ export const gameSlice = createSlice({
       planActions: [],
       planName: null,
       showTrack: true,
+      configuration: {
+        enableConsumables: false,
+      },
     },
     reducers: {
       getPlayerFulfilled: (state, action) => {
@@ -40,6 +43,13 @@ export const gameSlice = createSlice({
       hideTrack: (state) => {
         state.showTrack = false
       },
+
+      setConfiguration: (state, action) => {
+        state.configuration = {
+          ...state.configuration,
+          ...action.payload.configuration,
+        }
+      }
     }
   })
 
@@ -51,6 +61,7 @@ export const {
   clearPlanActions,
   showTrack,
   hideTrack,
+  setConfiguration,
 } = gameSlice.actions
 
 export default gameSlice.reducer
