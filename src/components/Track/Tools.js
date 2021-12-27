@@ -17,6 +17,7 @@ import { selectPlayerJob, selectTrackState } from '../../store/game/selectors'
 import { setEditMode, setToolbarState } from '../../store/system/reducers'
 import ItemResizer from './ItemResizer'
 import Configuration from '../Configuration'
+import { Tooltip } from '@mui/material'
 
 const ToolContainer = styled.div`
   height: 25px;
@@ -66,55 +67,66 @@ const Tools = () => {
               variant="text" 
               aria-label="text button group"
             >
-              <Button
-                  onClick={() => {
-                    if (!showTrackState) {
+              <Tooltip title="Toggle Track">
+                <Button
+                    onClick={() => {
+                      if (!showTrackState) {
+                        dispatch(showTrack())
+                      } else {
+                        dispatch(hideTrack())
+                      }
+                    }}
+                >
+                  <FontAwesomeIcon icon={showTrackState ? faMinusCircle : faPlusCircle} />
+                </Button>
+              </Tooltip>
+              
+              <Tooltip title="Load Opener">
+                <Button 
+                    onClick={() => {
+                      const jobPhases = PHASES[playerJob]
+                      if (!jobPhases) return
+              
+                      const opener = PHASES[playerJob].OPENER
+                      dispatch(loadPlanActions({ actions: opener, planName: "opener" }))
                       dispatch(showTrack())
-                    } else {
-                      dispatch(hideTrack())
-                    }
-                  }}
-              >
-                <FontAwesomeIcon icon={showTrackState ? faMinusCircle : faPlusCircle} />
-              </Button>
-              <Button 
-                  onClick={() => {
-                    const jobPhases = PHASES[playerJob]
-                    if (!jobPhases) return
-            
-                    const opener = PHASES[playerJob].OPENER
-                    dispatch(loadPlanActions({ actions: opener, planName: "opener" }))
-                    dispatch(showTrack())
-                  }}
-              >
-                <FontAwesomeIcon icon={faRecordVinyl} />
-              </Button>
-              <Button
-                  onClick={() => {
-                    if (!editMode) {
-                      dispatch(setEditMode({ editMode: true }))
-                    } else {
-                      dispatch(setEditMode({ editMode: false }))
-                    }
-                  }}
-              >
-                <FontAwesomeIcon icon={!editMode ? faBorderAll : faBorderNone} />
-              </Button>
-              <Button
-                  onClick={() => {
-                    dispatch(clearPlayerActions())
-                    dispatch(clearPlanActions())
-                  }}
-              >
-                <FontAwesomeIcon icon={faTrashAlt} />
-              </Button>
-              <Button
-                  onClick={(e) => {
-                    setConfigAnchorEl(e.currentTarget)
-                  }}
-              >
-                <FontAwesomeIcon icon={faCogs} />
-              </Button>
+                    }}
+                >
+                  <FontAwesomeIcon icon={faRecordVinyl} />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Unlock UI">
+                <Button
+                    onClick={() => {
+                      if (!editMode) {
+                        dispatch(setEditMode({ editMode: true }))
+                      } else {
+                        dispatch(setEditMode({ editMode: false }))
+                      }
+                    }}
+                >
+                  <FontAwesomeIcon icon={!editMode ? faBorderAll : faBorderNone} />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Clear">
+                <Button
+                    onClick={() => {
+                      dispatch(clearPlayerActions())
+                      dispatch(clearPlanActions())
+                    }}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </Button>
+              </Tooltip>
+              <Tooltip title="Options">
+                <Button
+                    onClick={(e) => {
+                      setConfigAnchorEl(e.currentTarget)
+                    }}
+                >
+                  <FontAwesomeIcon icon={faCogs} />
+                </Button>
+              </Tooltip>
             </ButtonGroup>
           </ToolButtonContainer>
         
