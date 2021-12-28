@@ -1,5 +1,5 @@
 export const JobIds = {
-  25: "BLM",
+  25: 'BLM',
 }
 
 export const ACTION_TYPES = {

@@ -13,8 +13,8 @@ const Container = styled.div`
   display: inline-flex;
   position: absolute;
 
-  ${(props => {
-    if(props.type === 'player') {
+  ${((props) => {
+    if (props.type === 'player') {
       return `
         margin-top: -8px;
         margin-left: 8px;
@@ -41,85 +41,85 @@ const ActionSet = ({
   return (
     <Container type={type}>
       {
-          actions.map((action, i) => {
-            if (action.type === ACTION_TYPES.PULL) {
-              return (
-                <Pullbar />
-              )
-            }
-            //  The action that was supposed to be used
-            let failedActionMatch = false
-            const guidedAction = guidingActions ? guidingActions[i] : null
-            if (guidedAction && guidedAction.name === action.name) {
-              // Return fill-in Action
-              return (
-                <Action
-                  index={i}
-                  key={`${i}`}
-                />
-              )
-            } else  if (guidedAction && guidedAction.name !== action.name) {
-              failedActionMatch = true
-            }
-
-            let successfulActionMatch = false
-            const performedAction = performedActions ? performedActions[i] : null
-            if (performedAction && performedAction.name === action.name) successfulActionMatch = true
-
-            const formattedActionName = action.name.toLowerCase().replace(/ /g,"_")
-            let actionType = "job"
-            if (MagicalRangedActions.includes(action.name)) {
-              actionType = "magicalRanged"
-            }
-
-            if (UniversalActions.includes(action.name)) {
-              actionType = "universal"
-            }
-
-            if (ItemActions.includes(action.name)) {
-              actionType = "item"
-            }
-
-            let image = null
-            switch (actionType) {
-              case 'job':
-                image = actionImages && actionImages[`${formattedActionName}.png`]
-                break;
-              case 'magicalRanged':
-                image = magicalRangedImages[`${formattedActionName}.png`]
-                break;
-              case 'item':
-                image = itemImages[`${formattedActionName}.png`]
-                break;
-              case 'universal':
-              default:
-                return null
-            }
-
-            if (!image) {
-              image = ActionImages.MISSING_ACTION
-              console.warn('missing action', formattedActionName)
-            }
-
-            let displayType = action.type
-            if (guidedAction && failedActionMatch) {
-              displayType = guidedAction.type
-            }
-
+        actions.map((action, i) => {
+          if (action.type === ACTION_TYPES.PULL) {
+            return (
+              <Pullbar />
+            )
+          }
+          //  The action that was supposed to be used
+          let failedActionMatch = false
+          const guidedAction = guidingActions ? guidingActions[i] : null
+          if (guidedAction && guidedAction.name === action.name) {
+            // Return fill-in Action
             return (
               <Action
-                altText={formattedActionName}
                 index={i}
-                image={image}
-                key={`${i} - ${action.name}`}
-                type={displayType}
-                success={successfulActionMatch}
-                failure={failedActionMatch}
-                note={action.note}
+                key={`${i}`}
               />
             )
-          })
-        }
+          } else if (guidedAction && guidedAction.name !== action.name) {
+            failedActionMatch = true
+          }
+
+          let successfulActionMatch = false
+          const performedAction = performedActions ? performedActions[i] : null
+          if (performedAction && performedAction.name === action.name) successfulActionMatch = true
+
+          const formattedActionName = action.name.toLowerCase().replace(/ /g, '_')
+          let actionType = 'job'
+          if (MagicalRangedActions.includes(action.name)) {
+            actionType = 'magicalRanged'
+          }
+
+          if (UniversalActions.includes(action.name)) {
+            actionType = 'universal'
+          }
+
+          if (ItemActions.includes(action.name)) {
+            actionType = 'item'
+          }
+
+          let image = null
+          switch (actionType) {
+            case 'job':
+              image = actionImages && actionImages[`${formattedActionName}.png`]
+              break
+            case 'magicalRanged':
+              image = magicalRangedImages[`${formattedActionName}.png`]
+              break
+            case 'item':
+              image = itemImages[`${formattedActionName}.png`]
+              break
+            case 'universal':
+            default:
+              return null
+          }
+
+          if (!image) {
+            image = ActionImages.MISSING_ACTION
+            console.warn('missing action', formattedActionName)
+          }
+
+          let displayType = action.type
+          if (guidedAction && failedActionMatch) {
+            displayType = guidedAction.type
+          }
+
+          return (
+            <Action
+              altText={formattedActionName}
+              index={i}
+              image={image}
+              key={`${i} - ${action.name}`}
+              type={displayType}
+              success={successfulActionMatch}
+              failure={failedActionMatch}
+              note={action.note}
+            />
+          )
+        })
+      }
     </Container>
   )
 }

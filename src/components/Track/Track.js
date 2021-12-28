@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Draggable from 'react-draggable'
 
@@ -84,27 +84,27 @@ const Track = () => {
       {
         jobSupported ? (
           <Draggable
-              bounds="parent"
-              disabled={!editMode}
-              defaultPosition={{ x: trackWindowState.x, y: trackWindowState.y }}
-              onStop={(e, d) => {
-                dispatch(setTrackState({ track: { x: d.x, y: d.y } }))
-              }}
-          > 
+            bounds="parent"
+            disabled={!editMode}
+            defaultPosition={{ x: trackWindowState.x, y: trackWindowState.y }}
+            onStop={(e, d) => {
+              dispatch(setTrackState({ track: { x: d.x, y: d.y }}))
+            }}
+          >
             <TrackContainer showTrack={showTrack}>
               <ItemResizer enabled={editMode} />
 
               <TitleContainer>
                 <ImageContainer>
-                  { currentJobImage ?  (<img src={currentJobImage} alt={JobIds[player.Job]} width="35" />) : null }
+                  { currentJobImage ? (<img src={currentJobImage} alt={JobIds[player.Job]} width="35" />) : null }
                 </ImageContainer>
                 <TextContainer>{planName}</TextContainer>
               </TitleContainer>
-            
-    
+
+
               <TrackTop />
               <TrackBottom />
-      
+
               <ActionContainer>
                 <ActionSet actions={planActions} performedActions={playerActions} type="plan" />
                 <ActionSet actions={playerActions} guidingActions={planActions} type="player" />
@@ -114,7 +114,7 @@ const Track = () => {
         ) : null
       }
     </ListContainer>
-  ) 
+  )
 }
 
 export default Track

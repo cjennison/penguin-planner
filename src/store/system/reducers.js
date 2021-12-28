@@ -1,55 +1,55 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const systemSlice = createSlice({
-    name: 'system',
-    initialState: {
-      locked: false,
-      clickthrough: false,
-      editMode: false,
-      track: {
-        x: 0,
-        y: 0,
-        width: 400,
-        height: 200
-      },
-      toolbar: {
-        x: 0,
-        y: 0,
-      },
+  name: 'system',
+  initialState: {
+    locked: false,
+    clickthrough: false,
+    editMode: false,
+    track: {
+      x: 0,
+      y: 0,
+      width: 400,
+      height: 200,
     },
-    reducers: {
-      setLocked: (state, action) => {
-        state.locked = action.payload.locked
-      },
+    toolbar: {
+      x: 0,
+      y: 0,
+    },
+  },
+  reducers: {
+    setLocked: (state, action) => {
+      state.locked = action.payload.locked
+    },
 
-      setClickthrough: (state, action) => {
-        state.clickthrough = action.payload.clickthrough
-      },
+    setClickthrough: (state, action) => {
+      state.clickthrough = action.payload.clickthrough
+    },
 
-      setEditMode: (state, action) => {
-        state.editMode = action.payload.editMode
-      },
+    setEditMode: (state, action) => {
+      state.editMode = action.payload.editMode
+    },
 
-      setTrackState: (state, action) => {
-        state.track = {
-          ...state.track,
-          ...action.payload.track,
-        }
-      },
-
-      setToolbarState: (state, action) => {
-        state.toolbar = {
-          ...state.toolbar,
-          ...action.payload.toolbar,
-        }
+    setTrackState: (state, action) => {
+      state.track = {
+        ...state.track,
+        ...action.payload.track,
       }
-    }
-  })
+    },
 
-export const { 
-  setLocked, 
-  setClickthrough, 
-  setTrackState, 
+    setToolbarState: (state, action) => {
+      state.toolbar = {
+        ...state.toolbar,
+        ...action.payload.toolbar,
+      }
+    },
+  },
+})
+
+export const {
+  setLocked,
+  setClickthrough,
+  setTrackState,
   setToolbarState,
   setEditMode,
 } = systemSlice.actions

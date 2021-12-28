@@ -1,20 +1,20 @@
 export const UniversalActions = [
-  "Sprint",
-  "Teleport",
+  'Sprint',
+  'Teleport',
 ]
 
 export const MagicalRangedActions = [
-  "Swiftcast",
-  "Lucid Dreaming",
-  "Surecast",
-  "Addle",
-  "Sleep"
+  'Swiftcast',
+  'Lucid Dreaming',
+  'Surecast',
+  'Addle',
+  'Sleep',
 ]
 
 export const ItemActions = [
-  "Tincture of Intelligence",
-  "Tincture of Mind",
-  "Tincture of Strength",
-  "Tincture of Dexterity",
-  "Orange Juice",
+  'Tincture of Intelligence',
+  'Tincture of Mind',
+  'Tincture of Strength',
+  'Tincture of Dexterity',
+  'Orange Juice',
 ]

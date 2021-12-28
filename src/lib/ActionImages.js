@@ -1,18 +1,22 @@
+/* eslint-disable require-jsdoc */
+
 function importAll(r) {
-  let images = {};
-  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); return null; });
-  return images;
+  const images = {}
+  r.keys().map((item, index) => {
+    images[item.replace('./', '')] = r(item); return null
+  })
+  return images
 }
 
-const BLMImages = importAll(require.context('../images/ffxiv/icons/BLM', false, /\.(png|jpe?g|svg)$/));
-const MagicalRangedActions = importAll(require.context('../images/ffxiv/icons/BLM/MagicalRangedRollAction', false, /\.(png|jpe?g|svg)$/));
-const ItemActions = importAll(require.context('../images/ffxiv/icons/ITEM', false, /\.(png|jpe?g|svg)$/));
+const BLMImages = importAll(require.context('../images/ffxiv/icons/BLM', false, /\.(png|jpe?g|svg)$/))
+const MagicalRangedActions = importAll(require.context('../images/ffxiv/icons/BLM/MagicalRangedRollAction', false, /\.(png|jpe?g|svg)$/))
+const ItemActions = importAll(require.context('../images/ffxiv/icons/ITEM', false, /\.(png|jpe?g|svg)$/))
 
 const ActionImages = {
   MAGICAL_RANGED: MagicalRangedActions,
   BLM: BLMImages,
   ITEM: ItemActions,
-  MISSING_ACTION: MagicalRangedActions["break.png"],
+  MISSING_ACTION: MagicalRangedActions['break.png'],
 }
 
 export default ActionImages

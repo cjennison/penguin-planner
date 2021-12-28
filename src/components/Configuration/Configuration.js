@@ -1,6 +1,15 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Checkbox, Container, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel } from '@mui/material'
+import {
+  Button,
+  Checkbox,
+  Container,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+} from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectConfiguration } from '../../store/game/selectors'
 import { setConfiguration } from '../../store/game/reducers'
@@ -31,24 +40,24 @@ const Configuration = ({
             Configuration
             <CloseContainer>
               <Button
-                  onClick={() => {
-                    onClose()
-                  }}
+                onClick={() => {
+                  onClose()
+                }}
               >
                 <FontAwesomeIcon icon={faTimes} />
               </Button>
             </CloseContainer>
-            
+
           </FormLabel>
-          
+
           <FormGroup>
             <FormControlLabel control={
-            <Checkbox 
-                checked={configuration.enableConsumables}  
+              <Checkbox
+                checked={configuration.enableConsumables}
                 onChange={(e) => {
-                  dispatch(setConfiguration({ configuration: { enableConsumables: e.target.checked } }))
+                  dispatch(setConfiguration({ configuration: { enableConsumables: e.target.checked }}))
                 }}
-            />
+              />
             } label="Enable consumables" />
           </FormGroup>
           <FormHelperText>Display and track consumables as part of your rotation</FormHelperText>

@@ -2,74 +2,74 @@ import { createSelector } from 'reselect'
 import { ACTION_TYPES, JobIds } from '../../lib/IDConstants'
 
 export const selectPlayerActions = createSelector(
-  (state) => state.game,
-  (game) => {
-    const actions = game.playerActions || []
+    (state) => state.game,
+    (game) => {
+      const actions = game.playerActions || []
 
-    return actions.filter(a => {
-      if (a.type === ACTION_TYPES.CONSUMABLE && !game.configuration.enableConsumables) return false
-      return true
-    })
-  }
+      return actions.filter((a) => {
+        if (a.type === ACTION_TYPES.CONSUMABLE && !game.configuration.enableConsumables) return false
+        return true
+      })
+    },
 )
 
 export const selectPlanActions = createSelector(
-  (state) => state.game,
-  (game) =>{
-    const actions = game.planActions || []
+    (state) => state.game,
+    (game) =>{
+      const actions = game.planActions || []
 
-    return actions.filter(a => {
-      if (a.type === ACTION_TYPES.CONSUMABLE && !game.configuration.enableConsumables) return false
-      return true
-    })
-  }
+      return actions.filter((a) => {
+        if (a.type === ACTION_TYPES.CONSUMABLE && !game.configuration.enableConsumables) return false
+        return true
+      })
+    },
 )
 
 export const selectPlayerCompletedPlan = createSelector(
-  (state) => state.game,
-  selectPlayerActions,
-  selectPlanActions,
-  (game, playerActions, planActions) => {
-    if (playerActions.length >= planActions.length) return true
-    return false
-  }
+    (state) => state.game,
+    selectPlayerActions,
+    selectPlanActions,
+    (game, playerActions, planActions) => {
+      if (playerActions.length >= planActions.length) return true
+      return false
+    },
 )
 
 export const selectPlanName = createSelector(
-  (state) => state.game,
-  (game) =>
-    game.planName || null
+    (state) => state.game,
+    (game) =>
+      game.planName || null,
 )
 
 export const selectPlayer = createSelector(
-  (state) => state.game,
-  (game) =>
-    game.player
+    (state) => state.game,
+    (game) =>
+      game.player,
 )
 
 export const selectPlayerJob = createSelector(
-  (state) => state.game,
-  (game) => {
-    const player = game.player
-    if (player) {
-      return JobIds[player.Job]
-    }
+    (state) => state.game,
+    (game) => {
+      const player = game.player
+      if (player) {
+        return JobIds[player.Job]
+      }
 
-    return "NONE"
-  }
+      return 'NONE'
+    },
 )
 
 export const selectTrackState = createSelector(
-  (state) => state.game,
-  (game) => {
-    return game.showTrack
-  }
+    (state) => state.game,
+    (game) => {
+      return game.showTrack
+    },
 )
 
 
 export const selectConfiguration = createSelector(
-  (state) => state.game,
-  (game) => {
-    return game.configuration
-  }
+    (state) => state.game,
+    (game) => {
+      return game.configuration
+    },
 )

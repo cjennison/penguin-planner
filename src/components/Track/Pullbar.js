@@ -4,16 +4,16 @@ import styled from 'styled-components'
 import { ACTION_TYPES } from '../../lib/IDConstants'
 
 const ActionWidth = 40
-const ActionSpacing = 3;
+const ActionSpacing = 3
 const oGCDActionWidth = 40
 const margin = 1
 
 const PullContainer = styled.div`
   height: 100px;
-  width: ${props => props.type === ACTION_TYPES.GCD ? ActionWidth : oGCDActionWidth}px;
+  width: ${(props) => props.type === ACTION_TYPES.GCD ? ActionWidth : oGCDActionWidth}px;
   position: relative;
 
-  top: ${(props) => props.type === ACTION_TYPES.GCD ? "10px" : "-15px"};
+  top: ${(props) => props.type === ACTION_TYPES.GCD ? '10px' : '-15px'};
   left: ${(props) => `${props.index * (ActionSpacing + margin)}px`};
 `
 
@@ -36,7 +36,7 @@ const PullText = styled.div`
 
 const Pullbar = ({
   type,
-  index
+  index,
 }) => {
   return (
     <PullContainer

@@ -1,5 +1,5 @@
-import gameSlice from "./game/reducers";
-import systemSlice from "./system/reducers";
+import gameSlice from './game/reducers'
+import systemSlice from './system/reducers'
 
 const reducers = {
   game: gameSlice,

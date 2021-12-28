@@ -46,106 +46,106 @@ const Tools = () => {
   return (
     <>
       <Draggable
-          bounds="parent"
-          disabled={!editMode}
-          defaultPosition={{ x: toolbarWindowState.x, y: toolbarWindowState.y }}
-          onStop={(e, d) => {
-            dispatch(setToolbarState({ toolbar: { x: d.x, y: d.y } }))
-          }}
+        bounds="parent"
+        disabled={!editMode}
+        defaultPosition={{ x: toolbarWindowState.x, y: toolbarWindowState.y }}
+        onStop={(e, d) => {
+          dispatch(setToolbarState({ toolbar: { x: d.x, y: d.y }}))
+        }}
       >
         <ToolContainer
-            position={toolbarWindowState}
-        > 
-          
-          <ItemResizer 
-              enabled={editMode} 
-              targetType="toolbar"
+          position={toolbarWindowState}
+        >
+
+          <ItemResizer
+            enabled={editMode}
+            targetType="toolbar"
           />
 
           <ToolButtonContainer>
-            <ButtonGroup 
-              variant="text" 
+            <ButtonGroup
+              variant="text"
               aria-label="text button group"
             >
               <Tooltip title="Toggle Track">
                 <Button
-                    onClick={() => {
-                      if (!showTrackState) {
-                        dispatch(showTrack())
-                      } else {
-                        dispatch(hideTrack())
-                      }
-                    }}
+                  onClick={() => {
+                    if (!showTrackState) {
+                      dispatch(showTrack())
+                    } else {
+                      dispatch(hideTrack())
+                    }
+                  }}
                 >
                   <FontAwesomeIcon icon={showTrackState ? faMinusCircle : faPlusCircle} />
                 </Button>
               </Tooltip>
-              
+
               <Tooltip title="Load Opener">
-                <Button 
-                    onClick={() => {
-                      const jobPhases = PHASES[playerJob]
-                      if (!jobPhases) return
-              
-                      const opener = PHASES[playerJob].OPENER
-                      dispatch(loadPlanActions({ actions: opener, planName: "opener" }))
-                      dispatch(showTrack())
-                    }}
+                <Button
+                  onClick={() => {
+                    const jobPhases = PHASES[playerJob]
+                    if (!jobPhases) return
+
+                    const opener = PHASES[playerJob].OPENER
+                    dispatch(loadPlanActions({ actions: opener, planName: 'opener' }))
+                    dispatch(showTrack())
+                  }}
                 >
                   <FontAwesomeIcon icon={faRecordVinyl} />
                 </Button>
               </Tooltip>
               <Tooltip title="Unlock UI">
                 <Button
-                    onClick={() => {
-                      if (!editMode) {
-                        dispatch(setEditMode({ editMode: true }))
-                      } else {
-                        dispatch(setEditMode({ editMode: false }))
-                      }
-                    }}
+                  onClick={() => {
+                    if (!editMode) {
+                      dispatch(setEditMode({ editMode: true }))
+                    } else {
+                      dispatch(setEditMode({ editMode: false }))
+                    }
+                  }}
                 >
                   <FontAwesomeIcon icon={!editMode ? faBorderAll : faBorderNone} />
                 </Button>
               </Tooltip>
               <Tooltip title="Clear">
                 <Button
-                    onClick={() => {
-                      dispatch(clearPlayerActions())
-                      dispatch(clearPlanActions())
-                    }}
+                  onClick={() => {
+                    dispatch(clearPlayerActions())
+                    dispatch(clearPlanActions())
+                  }}
                 >
                   <FontAwesomeIcon icon={faTrashAlt} />
                 </Button>
               </Tooltip>
               <Tooltip title="Options">
                 <Button
-                    onClick={(e) => {
-                      setConfigAnchorEl(e.currentTarget)
-                    }}
+                  onClick={(e) => {
+                    setConfigAnchorEl(e.currentTarget)
+                  }}
                 >
                   <FontAwesomeIcon icon={faCogs} />
                 </Button>
               </Tooltip>
             </ButtonGroup>
           </ToolButtonContainer>
-        
+
         </ToolContainer>
       </Draggable>
       <Popover
-          id="configPopover"
-          open={configOpen}
-          anchorEl={configAnchorEl}
-          onClose={() => {
-            setConfigAnchorEl(null)
-          }}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-        >
-          <Configuration onClose={() => setConfigAnchorEl(null)} />
-        </Popover>
+        id="configPopover"
+        open={configOpen}
+        anchorEl={configAnchorEl}
+        onClose={() => {
+          setConfigAnchorEl(null)
+        }}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Configuration onClose={() => setConfigAnchorEl(null)} />
+      </Popover>
     </>
   )
 }

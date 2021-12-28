@@ -12,7 +12,7 @@ const OverlayController = () => {
   const playerActions = useSelector(selectPlayerActions)
 
   const planCompleted = useSelector(selectPlayerCompletedPlan)
-  
+
   useEffect(() => {
     if (planActions.length && planCompleted) {
       setTimeout(() => {
@@ -24,23 +24,23 @@ const OverlayController = () => {
 
   useEffect(() => {
     //  Attach to OverlayPlugin
-    document.addEventListener("onLogLine", (e) => {
+    document.addEventListener('onLogLine', (e) => {
       const result = ActionReader.readLine(e.detail)
       if (result.isValidAction) {
         dispatch(addPlayerAction({ action: result.action }))
       }
     })
 
-    document.addEventListener("onCombatData", (e) => {
-        console.log("onCombatData", e)
+    document.addEventListener('onCombatData', (e) => {
+      console.log('onCombatData', e)
 
-      if (e.detail.isActive === "false") {
+      if (e.detail.isActive === 'false') {
         //  dispatch(clearPlayerActions())
       }
     })
 
-    document.addEventListener("onStateUpdate", (e) => {
-        console.log("onStateUpdate", e)
+    document.addEventListener('onStateUpdate', (e) => {
+      console.log('onStateUpdate', e)
 
       const payload = e.detail
       if (payload.isLocked === false || payload.isLocked === true) {
@@ -48,22 +48,21 @@ const OverlayController = () => {
       }
     })
 
-    document.addEventListener("onPlayerData", (e) => {
-      console.log("onPlayerData", e)
+    document.addEventListener('onPlayerData', (e) => {
+      console.log('onPlayerData', e)
     })
 
-    document.addEventListener("onPartyChange", (e) => {
-      console.log("onPartyChange", e)
+    document.addEventListener('onPartyChange', (e) => {
+      console.log('onPartyChange', e)
     })
-    
+
     window.callOverlayHandler({ call: 'getCombatants' }).then((data) => {
       const player = data.combatants[0]
       if (player && player.Name) {
+        console.log('Loaded Player', player)
         dispatch(getPlayerFulfilled({ player: player }))
       }
     })
-
-   
   }, [])
 
   return null
