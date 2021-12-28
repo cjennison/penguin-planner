@@ -3,7 +3,7 @@ import { ACTION_TYPES } from "./IDConstants"
 import BLMActionTypes from "./actions/BLM/types"
 
 const UniversalActions = {
-  "Sprint": ACTION_TYPES.GCD,
+  "Sprint": ACTION_TYPES.oGCD,
   "Tincture of Intelligence": ACTION_TYPES.CONSUMABLE,
   "Tincture of Strength": ACTION_TYPES.CONSUMABLE,
   "Tincture of Mind": ACTION_TYPES.CONSUMABLE,
@@ -12,10 +12,10 @@ const UniversalActions = {
 }
 
 const MagicalRangedActions = {
-  "Swiftcast": ACTION_TYPES.GCD,
-  "Lucid Dreaming": ACTION_TYPES.GCD,
-  "Surecast": ACTION_TYPES.GCD,
-  "Addle": ACTION_TYPES.GCD,
+  "Swiftcast": ACTION_TYPES.oGCD,
+  "Lucid Dreaming": ACTION_TYPES.oGCD,
+  "Surecast": ACTION_TYPES.oGCD,
+  "Addle": ACTION_TYPES.oGCD,
   "Sleep": ACTION_TYPES.GCD,
 }
 
