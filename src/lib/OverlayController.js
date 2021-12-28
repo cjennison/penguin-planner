@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addPlayerAction, clearPlanActions, clearPlayerActions, getPlayerFulfilled } from '../store/game/reducers'
-import { selectPlanActions, selectPlayerActions } from '../store/game/selectors'
+import { selectPlanActions, selectPlayerActions, selectPlayerCompletedPlan } from '../store/game/selectors'
 import { setLocked } from '../store/system/reducers'
 import ActionReader from './ActionReader'
 
@@ -11,8 +11,10 @@ const OverlayController = () => {
   const planActions = useSelector(selectPlanActions)
   const playerActions = useSelector(selectPlayerActions)
 
+  const planCompleted = useSelector(selectPlayerCompletedPlan)
+  
   useEffect(() => {
-    if (planActions.length && playerActions.length >= planActions.length) {
+    if (planActions.length && planCompleted) {
       setTimeout(() => {
         dispatch(clearPlanActions())
         dispatch(clearPlayerActions())
@@ -33,7 +35,7 @@ const OverlayController = () => {
         console.log("onCombatData", e)
 
       if (e.detail.isActive === "false") {
-        dispatch(clearPlayerActions())
+        //  dispatch(clearPlayerActions())
       }
     })
 

@@ -25,6 +25,16 @@ export const selectPlanActions = createSelector(
   }
 )
 
+export const selectPlayerCompletedPlan = createSelector(
+  (state) => state.game,
+  selectPlayerActions,
+  selectPlanActions,
+  (game, playerActions, planActions) => {
+    if (playerActions.length >= planActions.length) return true
+    return false
+  }
+)
+
 export const selectPlanName = createSelector(
   (state) => state.game,
   (game) =>

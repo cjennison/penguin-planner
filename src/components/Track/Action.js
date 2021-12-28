@@ -25,13 +25,20 @@ const SuccessContainer = styled.div`
   left: 15px;
 `
 
+const NoteText = styled.div`
+  position: absolute;
+  color: white;
+  width: 40px;
+`
+
 const Action = ({
   type,
   index,
   image,
   altText,
   success,
-  failure
+  failure,
+  note,
 }) => {
 
   return (
@@ -39,7 +46,12 @@ const Action = ({
       index={index}
       type={type}
     >
-      <img src={image} alt={altText} width="100%" height="100%" />
+      {
+        image ? (
+          <img src={image} alt={altText} width="100%" height="100%" />
+        ) : null
+      }
+      
       {
         success ? (
           <SuccessContainer>
@@ -53,6 +65,14 @@ const Action = ({
           <SuccessContainer>
             <FontAwesomeIcon color="red" icon={faTimesCircle} />
           </SuccessContainer>
+        ) : null
+      }
+
+      {
+        note && !success ? (
+          <NoteText>
+            {note}
+          </NoteText>
         ) : null
       }
     </ActionBox>
