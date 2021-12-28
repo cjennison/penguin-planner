@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import Action from './Action'
-import { selectConfiguration, selectPlayer, selectPlayerJob } from '../../store/game/selectors'
+import { selectPlayer, selectPlayerJob } from '../../store/game/selectors'
 import ActionImages from '../../lib/ActionImages'
 import { MagicalRangedActions, UniversalActions, ItemActions } from '../../lib/ActionSpecifications'
+import { ACTION_TYPES } from '../../lib/IDConstants'
+import Pullbar from './Pullbar'
 
 const Container = styled.div`
   display: inline-flex;
@@ -31,7 +33,6 @@ const ActionSet = ({
 }) => {
   const player = useSelector(selectPlayer)
   const playerJob = useSelector(selectPlayerJob)
-  const configuration = useSelector(selectConfiguration)
 
   const actionImages = player ? ActionImages[playerJob] : {}
   const magicalRangedImages = ActionImages.MAGICAL_RANGED
@@ -41,11 +42,22 @@ const ActionSet = ({
     <Container type={type}>
       {
           actions.map((action, i) => {
+            if (action.type === ACTION_TYPES.PULL) {
+              return (
+                <Pullbar />
+              )
+            }
             //  The action that was supposed to be used
             let failedActionMatch = false
             const guidedAction = guidingActions ? guidingActions[i] : null
             if (guidedAction && guidedAction.name === action.name) {
-              return null
+              // Return fill-in Action
+              return (
+                <Action
+                  index={i}
+                  key={`${i}`}
+                />
+              )
             } else  if (guidedAction && guidedAction.name !== action.name) {
               failedActionMatch = true
             }
@@ -103,6 +115,7 @@ const ActionSet = ({
                 type={displayType}
                 success={successfulActionMatch}
                 failure={failedActionMatch}
+                note={action.note}
               />
             )
           })
