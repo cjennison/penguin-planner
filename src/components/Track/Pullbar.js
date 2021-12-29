@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { ACTION_TYPES } from '../../lib/IDConstants'
@@ -49,6 +50,11 @@ const Pullbar = ({
       </PullText>
     </PullContainer>
   )
+}
+
+Pullbar.propTypes = {
+  type: PropTypes.string,
+  index: PropTypes.number,
 }
 
 export default Pullbar

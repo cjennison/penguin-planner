@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -76,6 +78,16 @@ const Action = ({
       }
     </ActionBox>
   )
+}
+
+Action.propTypes = {
+  type: PropTypes.string,
+  index: PropTypes.number,
+  image: PropTypes.string,
+  altText: PropTypes.string,
+  success: PropTypes.bool,
+  failure: PropTypes.bool,
+  note: PropTypes.string,
 }
 
 export default Action

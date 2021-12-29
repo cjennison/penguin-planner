@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   Button,
@@ -65,6 +66,10 @@ const Configuration = ({
       </FormContainer>
     </Container>
   )
+}
+
+Configuration.propTypes = {
+  onClose: PropTypes.func,
 }
 
 export default Configuration

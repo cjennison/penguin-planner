@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import Action from './Action'
 import { selectPlayer, selectPlayerJob } from '../../store/game/selectors'
@@ -84,7 +85,7 @@ const ActionSet = ({
       {
         (() => {
           //  TODO: This does not scale
-          //  Checks if the pullbar has been accounted for
+          //  Checks if the pullbar has been accounted for in case of adding placeholders
           let accountedForPullBar = false
           return actions.map((action, i) => {
             if (action.type === ACTION_TYPES.PULL) {
@@ -199,6 +200,13 @@ const ActionSet = ({
       }
     </Container>
   )
+}
+
+ActionSet.propTypes = {
+  actions: PropTypes.array,
+  guidingActions: PropTypes.array,
+  performedActions: PropTypes.array,
+  type: PropTypes.string,
 }
 
 export default ActionSet

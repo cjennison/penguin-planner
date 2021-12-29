@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ResizeContainer = styled.div`
@@ -23,6 +24,10 @@ const ItemResizer = ({
       }
     </>
   )
+}
+
+ItemResizer.propTypes = {
+  enabled: PropTypes.bool,
 }
 
 export default ItemResizer
