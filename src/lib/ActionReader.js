@@ -3,7 +3,7 @@ import ActionTypeIDs from './ActionTypeIDs'
 
 const ActionMatches = [
   {
-    matchRegex: /(?<=\bYou use\s)(\w+\s*\w+\s*\w+)/g,
+    matchRegex: /(?<=\bYou use\s)(\S+\s*\S+\s*\w+)/g,
   },
   {
     matchRegex: /(?<=\bYou cast\s)(\w+\s*\w+\s*\w+)/g,
