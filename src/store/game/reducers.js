@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { MAX_PLAYER_ACTIONS } from '../../lib/SystemConstants'
 
 export const gameSlice = createSlice({
   name: 'game',
@@ -27,6 +28,10 @@ export const gameSlice = createSlice({
 
     addPlayerAction: (state, action) => {
       state.playerActions.push(action.payload.action)
+    },
+
+    removePlayerAction: (state) => {
+      state.playerActions = state.playerActions.slice(1, MAX_PLAYER_ACTIONS)
     },
 
     clearPlayerActions: (state) => {
@@ -70,6 +75,7 @@ export const {
   showTrack,
   hideTrack,
   setConfiguration,
+  removePlayerAction,
 } = gameSlice.actions
 
 export default gameSlice.reducer

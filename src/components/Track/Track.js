@@ -25,8 +25,9 @@ const TrackContainer = styled.div`
     }
   }}
 
-  height: 125px;
+  height: 135px;
   width: 1000px;
+  background: rgba(0, 0, 0, 0.3);
 `
 
 const TrackTop = styled.div`
@@ -52,14 +53,14 @@ const ActionContainer = styled.div`
 const TextContainer = styled.div`
   font-size: 30px;
   margin-top: -0px;
-  text-shadow: 0px 0px white;
+  color: white;
 `
 
 const TitleContainer = styled.div`
   display:flex;
   position: absolute;
   top: -10px;
-  left: 0;
+  right: 0;
 `
 
 const Track = () => {

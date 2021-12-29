@@ -8,8 +8,9 @@ const ResizeContainer = styled.div`
   left: 0;
   border: 5px dashed blue;
   height: 100%;
-  width: calc(100% - 10px);
+  width: 100%;
   cursor: move;
+  box-sizing: border-box;
 `
 
 const ItemResizer = ({
@@ -19,7 +20,7 @@ const ItemResizer = ({
     <>
       {
         enabled ? (
-          <ResizeContainer/>
+          <ResizeContainer />
         ) : null
       }
     </>

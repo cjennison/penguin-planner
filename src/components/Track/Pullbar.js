@@ -19,20 +19,21 @@ const PullContainer = styled.div`
 `
 
 const PullBarObject = styled.div`
-  height: 100%;
+  height: 75%;
   border-right: 1px solid white;
   
   position: relative;
   left: -10px;
-  top: -10px;
+  top: 12px;
 `
 
 const PullText = styled.div`
   position: absolute;
   color: white;
+  font-weight: 500;
 
   margin-left: 15px;
-  margin-top: -90px;
+  margin-top: -85px;
 `
 
 const Pullbar = ({

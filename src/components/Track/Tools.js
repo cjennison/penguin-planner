@@ -20,8 +20,9 @@ import Configuration from '../Configuration'
 import { Tooltip } from '@mui/material'
 
 const ToolContainer = styled.div`
-  height: 25px;
+  height: 35px;
   width: 200px;
+  background: rgba(0, 0, 0, 0.3);
 `
 
 const ToolButtonContainer = styled.div`

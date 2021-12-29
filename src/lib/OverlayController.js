@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addPlayerAction, clearPlanActions, clearPlayerActions, getPlayerFulfilled, hideTrack } from '../store/game/reducers'
+import { addPlayerAction, clearPlanActions, clearPlayerActions, getPlayerFulfilled, hideTrack, removePlayerAction } from '../store/game/reducers'
 import { selectPlanActions, selectPlayerActions, selectPlayerCompletedPlan } from '../store/game/selectors'
 import { setLocked } from '../store/system/reducers'
 import ActionReader from './ActionReader'
+import { MAX_PLAYER_ACTIONS } from './SystemConstants'
 
 const OverlayController = () => {
   const dispatch = useDispatch()
@@ -14,6 +15,9 @@ const OverlayController = () => {
   const planCompleted = useSelector(selectPlayerCompletedPlan)
 
   useEffect(() => {
+    if (playerActions.length > MAX_PLAYER_ACTIONS) {
+      dispatch(removePlayerAction())
+    }
     if (planActions.length && planCompleted) {
       setTimeout(() => {
         dispatch(clearPlanActions())
