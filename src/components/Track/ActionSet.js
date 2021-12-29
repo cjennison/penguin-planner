@@ -73,7 +73,7 @@ const ActionSet = ({
 
     let target = guidingActions[guidingActionIndex]
 
-    if (![ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(target.type)) {
+    if (target && ![ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(target.type)) {
       guidingActionIndex += 1
       target = guidingActions[guidingActionIndex]
     }
