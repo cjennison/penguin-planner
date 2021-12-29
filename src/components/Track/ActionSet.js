@@ -83,6 +83,8 @@ const ActionSet = ({
     <Container type={type}>
       {
         (() => {
+          //  TODO: This does not scale
+          //  Checks if the pullbar has been accounted for
           let accountedForPullBar = false
           return actions.map((action, i) => {
             if (action.type === ACTION_TYPES.PULL) {

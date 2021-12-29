@@ -26,7 +26,6 @@ const OverlayController = () => {
   useEffect(() => {
     //  Attach to OverlayPlugin
     document.addEventListener('onLogLine', (e) => {
-      //  console.log(e.detail)
       const result = ActionReader.readLine(e.detail)
       if (result.isValidAction) {
         dispatch(addPlayerAction({ action: result.action }))

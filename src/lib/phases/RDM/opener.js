@@ -12,8 +12,6 @@ opener.push({ name: 'Veraero III', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Swiftcast', type: ACTION_TYPES.oGCD })
 opener.push({ name: 'Acceleration', type: ACTION_TYPES.oGCD })
 
-/*
-
 opener.push({ name: 'Verthunder III', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Tincture of Intelligence', type: ACTION_TYPES.CONSUMABLE })
 
@@ -44,6 +42,5 @@ opener.push({ name: 'Veraero III', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Jolt II', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Verthunder III', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Fleche', type: ACTION_TYPES.oGCD })
-*/
 
 export default opener
