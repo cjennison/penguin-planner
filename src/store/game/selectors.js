@@ -30,7 +30,8 @@ export const selectPlayerCompletedPlan = createSelector(
     selectPlayerActions,
     selectPlanActions,
     (game, playerActions, planActions) => {
-      if (playerActions.length >= planActions.length) return true
+      const clearedPlanActions = planActions.filter((action) => [ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(action.type))
+      if (playerActions.length >= clearedPlanActions.length) return true
       return false
     },
 )

@@ -1,5 +1,6 @@
 export const JobIds = {
   25: 'BLM',
+  35: 'RDM',
 }
 
 export const ACTION_TYPES = {

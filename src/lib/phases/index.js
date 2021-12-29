@@ -1,8 +1,12 @@
-import opener from './BLM/opener'
+import BLMOpener from './BLM/opener'
+import RDMOpener from './RDM/opener'
 
 const PHASES = {
   BLM: {
-    OPENER: opener,
+    OPENER: BLMOpener,
+  },
+  RDM: {
+    OPENER: RDMOpener,
   },
 }
 

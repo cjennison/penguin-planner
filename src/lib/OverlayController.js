@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addPlayerAction, clearPlanActions, clearPlayerActions, getPlayerFulfilled } from '../store/game/reducers'
+import { addPlayerAction, clearPlanActions, clearPlayerActions, getPlayerFulfilled, hideTrack } from '../store/game/reducers'
 import { selectPlanActions, selectPlayerActions, selectPlayerCompletedPlan } from '../store/game/selectors'
 import { setLocked } from '../store/system/reducers'
 import ActionReader from './ActionReader'
@@ -18,6 +18,7 @@ const OverlayController = () => {
       setTimeout(() => {
         dispatch(clearPlanActions())
         dispatch(clearPlayerActions())
+        dispatch(hideTrack())
       }, 2000)
     }
   }, [playerActions])
@@ -25,6 +26,7 @@ const OverlayController = () => {
   useEffect(() => {
     //  Attach to OverlayPlugin
     document.addEventListener('onLogLine', (e) => {
+      //  console.log(e.detail)
       const result = ActionReader.readLine(e.detail)
       if (result.isValidAction) {
         dispatch(addPlayerAction({ action: result.action }))
