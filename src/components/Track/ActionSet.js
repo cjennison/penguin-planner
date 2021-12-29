@@ -140,7 +140,6 @@ const ActionSet = ({
 
               if (!performedAction) {
                 const prevActionIndexObject = getPlayerActionIndex(i - 1)
-                console.log('PrevAction', prevActionIndexObject)
                 if (prevActionIndexObject.action || i === 0) {
                   isNextAction = true
                 }
