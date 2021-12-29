@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { ACTION_TYPES } from '../../lib/IDConstants'
 
@@ -31,8 +31,8 @@ const ActionBox = styled.div`
 
 const SuccessContainer = styled.div`
   position: relative;
-  top: -50px;
-  left: 15px;
+  top: -42px;
+  left: 0px;
 `
 
 const NoteText = styled.div`
@@ -67,7 +67,7 @@ const Action = ({
       {
         success ? (
           <SuccessContainer>
-            <FontAwesomeIcon color="lightgreen" icon={faCheckCircle} />
+            <FontAwesomeIcon color="lightgreen" icon={faCheck} size="2x" />
           </SuccessContainer>
         ) : null
       }
@@ -75,7 +75,7 @@ const Action = ({
       {
         failure ? (
           <SuccessContainer>
-            <FontAwesomeIcon color="red" icon={faTimesCircle} />
+            <FontAwesomeIcon color="red" icon={faTimes} size="2x" />
           </SuccessContainer>
         ) : null
       }
