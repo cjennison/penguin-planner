@@ -10,6 +10,14 @@ export const gameSlice = createSlice({
     showTrack: true,
     configuration: {
       enableConsumables: false,
+      showLastNActions: {
+        num: 4,
+        enabled: false,
+      },
+      showNextNActions: {
+        num: 12,
+        enabled: false,
+      },
     },
   },
   reducers: {

@@ -56,7 +56,7 @@ const Action = ({
       className={active ? 'glow' : null}
       index={index}
       type={type}
-      actionCompleted={success || failure}
+      actionCompleted={success}
     >
       {
         image ? (

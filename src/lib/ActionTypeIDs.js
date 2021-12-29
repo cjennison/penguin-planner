@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from './IDConstants'
 
 import BLMActionTypes from './actions/BLM/types'
+import RDMActionTypes from './actions/RDM/types'
 
 const UniversalActions = {
   'Sprint': ACTION_TYPES.oGCD,
@@ -23,6 +24,7 @@ const ActionTypeIDs = {
   ...UniversalActions,
   ...MagicalRangedActions,
   ...BLMActionTypes,
+  ...RDMActionTypes,
 }
 
 export default ActionTypeIDs

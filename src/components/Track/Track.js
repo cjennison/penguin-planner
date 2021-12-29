@@ -52,7 +52,7 @@ const ActionContainer = styled.div`
 const TextContainer = styled.div`
   font-size: 30px;
   margin-top: -0px;
-  1px 1px white;
+  text-shadow: 0px 0px white;
 `
 
 const TitleContainer = styled.div`

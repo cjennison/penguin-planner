@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import Action from './Action'
-import { selectPlayer, selectPlayerJob } from '../../store/game/selectors'
+import { selectConfiguration, selectPlayer, selectPlayerJob } from '../../store/game/selectors'
 import ActionImages from '../../lib/ActionImages'
 import { MagicalRangedActions, UniversalActions, ItemActions } from '../../lib/ActionSpecifications'
 import { ACTION_TYPES } from '../../lib/IDConstants'
@@ -34,6 +34,7 @@ const ActionSet = ({
 }) => {
   const player = useSelector(selectPlayer)
   const playerJob = useSelector(selectPlayerJob)
+  const configuration = useSelector(selectConfiguration)
 
   const actionImages = player ? ActionImages[playerJob] : {}
   const magicalRangedImages = ActionImages.MAGICAL_RANGED
@@ -81,6 +82,16 @@ const ActionSet = ({
     return { action: target, indexDiff: guidingActionIndex - index, index: guidingActionIndex }
   }
 
+  let currentActionIndex = 0
+  if (type === 'player') {
+    currentActionIndex = actions.length
+  } else {
+    currentActionIndex = performedActions.length
+  }
+
+  const MAX_PERFORMED_ACTIONS = configuration.showLastNActions.num
+  const MAX_FUTURE_ACTIONS = configuration.showNextNActions.num
+
   return (
     <Container type={type}>
       {
@@ -89,12 +100,14 @@ const ActionSet = ({
           //  Checks if the pullbar has been accounted for in case of adding placeholders
           let accountedForPullBar = false
           return actions.map((action, i) => {
+            if (configuration.showLastNActions.enabled && i < currentActionIndex - MAX_PERFORMED_ACTIONS) return null
+            if (configuration.showNextNActions.enabled && i > currentActionIndex + MAX_FUTURE_ACTIONS) return null
             if (action.type === ACTION_TYPES.PULL) {
               return (
                 <Pullbar key={`pullbar-${i}`} />
               )
             }
-            //  The action that was supposed to be used
+
             let failedActionMatch = false
             let guidedAction = null
             let includePlaceholder = false
@@ -119,7 +132,7 @@ const ActionSet = ({
                   ) : null }
                   <Action
                     index={i}
-                    key={`${i}`}
+                    key={`s-${i}`}
                   />
                 </>
               )
@@ -145,7 +158,6 @@ const ActionSet = ({
                 }
               }
             }
-
 
             if (performedAction && performedAction.name === action.name) successfulActionMatch = true
 
@@ -190,11 +202,11 @@ const ActionSet = ({
             }
 
             return (
-              <>
+              <div style={{ display: 'inherit' }} key={`c-${i}`}>
                 { includePlaceholder ? (
                     <Action
                       index={i}
-                      key={`${i}`}
+                      key={`${i}-placeholder`}
                     />
                 ) : null }
                 <Action
@@ -208,7 +220,7 @@ const ActionSet = ({
                   failure={failedActionMatch}
                   note={action.note}
                 />
-              </>
+              </div>
             )
           })
         })()
