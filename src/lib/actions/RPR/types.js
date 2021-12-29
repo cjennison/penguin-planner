@@ -1,0 +1,40 @@
+import { ACTION_TYPES } from '../../IDConstants'
+
+const RPRActionTypes = {
+  'Slice': ACTION_TYPES.GCD,
+  'Waxing Slice': ACTION_TYPES.GCD,
+  'Shadow off Death': ACTION_TYPES.GCD,
+  'Harpe': ACTION_TYPES.GCD,
+  'Hell\'s Ingress': ACTION_TYPES.GCD,
+  'Hell\'s Egress': ACTION_TYPES.GCD,
+  'Spinning Scythe': ACTION_TYPES.GCD,
+  'Infernal Slice': ACTION_TYPES.GCD,
+  'Whorl of Death': ACTION_TYPES.GCD,
+  'Nightmare Scythe': ACTION_TYPES.GCD,
+  'Soul Slice': ACTION_TYPES.GCD,
+  'Soul Scythe': ACTION_TYPES.GCD,
+  'Gibbet': ACTION_TYPES.oGCD,
+  'Gallows': ACTION_TYPES.GCD,
+  'Guillotine': ACTION_TYPES.GCD,
+  'Soulsow': ACTION_TYPES.GCD,
+  'Plentiful Harvest': ACTION_TYPES.GCD,
+  'Communio': ACTION_TYPES.GCD,
+  'Void Reaping': ACTION_TYPES.GCD,
+  'Cross Reaping': ACTION_TYPES.GCD,
+  'Grim Reaping': ACTION_TYPES.GCD,
+  'Harvest Moon': ACTION_TYPES.GCD,
+
+  'Arcane Crest': ACTION_TYPES.oGCD,
+  'Blood Stalk': ACTION_TYPES.oGCD,
+  'Grim Swathe': ACTION_TYPES.oGCD,
+  'Arcane Circle': ACTION_TYPES.oGCD,
+  'Gluttony': ACTION_TYPES.oGCD,
+  'Enshroud': ACTION_TYPES.oGCD,
+  'Unveiled Gibbet': ACTION_TYPES.oGCD,
+  'Unveiled Gallows': ACTION_TYPES.oGCD,
+  'Regress': ACTION_TYPES.oGCD,
+  'Lemure\'s Slice': ACTION_TYPES.oGCD,
+  'Lemure\'s Scythe': ACTION_TYPES.oGCD,
+}
+
+export default RPRActionTypes
