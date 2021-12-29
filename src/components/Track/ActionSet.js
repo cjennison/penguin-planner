@@ -44,15 +44,16 @@ const ActionSet = ({
 
     //  iterate over self and reduce the current index if a non-action is found
     let performedActionIndex = index
-    for (let i = 0; i < index; i++) {
+    for (let i = 0; i <= index; i++) {
       const gAction = actions[i]
+
       if (![ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(gAction.type)) {
         performedActionIndex -= 1
       }
     }
 
     const target = performedActions[performedActionIndex]
-    return { action: target }
+    return { action: target, lastIndex: performedActionIndex }
   }
 
   const nextGuidedActionFromIndex = (index) => {
@@ -77,7 +78,7 @@ const ActionSet = ({
       target = guidingActions[guidingActionIndex]
     }
 
-    return { action: target, indexDiff: guidingActionIndex - index }
+    return { action: target, indexDiff: guidingActionIndex - index, index: guidingActionIndex }
   }
 
   return (
@@ -128,9 +129,24 @@ const ActionSet = ({
 
             let successfulActionMatch = false
             let performedAction = null
+            let isNextAction = false
             if (performedActions) {
-              performedAction = getPlayerActionIndex(i).action
+              const playerActionIndexObject = getPlayerActionIndex(i)
+              performedAction = playerActionIndexObject.action
+
+              //  If there is a matching performed action for the previous action
+              //    But there is no performed action for this action
+              //    then I am the next action
+
+              if (!performedAction) {
+                const prevActionIndexObject = getPlayerActionIndex(i - 1)
+                console.log('PrevAction', prevActionIndexObject)
+                if (prevActionIndexObject.action || i === 0) {
+                  isNextAction = true
+                }
+              }
             }
+
 
             if (performedAction && performedAction.name === action.name) successfulActionMatch = true
 
@@ -183,6 +199,7 @@ const ActionSet = ({
                     />
                 ) : null }
                 <Action
+                  active={isNextAction}
                   altText={formattedActionName}
                   index={i}
                   image={image}

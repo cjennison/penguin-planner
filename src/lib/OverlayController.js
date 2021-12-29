@@ -19,7 +19,7 @@ const OverlayController = () => {
         dispatch(clearPlanActions())
         dispatch(clearPlayerActions())
         dispatch(hideTrack())
-      }, 2000)
+      }, 4000)
     }
   }, [playerActions])
 

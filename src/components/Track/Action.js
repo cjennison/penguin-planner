@@ -19,6 +19,14 @@ const ActionBox = styled.div`
 
   top: ${(props) => props.type === ACTION_TYPES.GCD ? '10px' : '-15px'};
   left: ${(props) => `${props.index * (ActionSpacing + margin)}px`};
+  
+  img {
+    ${(props) => {
+    if (props.actionCompleted) {
+      return 'opacity: 0.65;'
+    }
+  }}
+  }
 `
 
 const SuccessContainer = styled.div`
@@ -41,11 +49,14 @@ const Action = ({
   success,
   failure,
   note,
+  active,
 }) => {
   return (
     <ActionBox
+      className={active ? 'glow' : null}
       index={index}
       type={type}
+      actionCompleted={success || failure}
     >
       {
         image ? (
@@ -81,7 +92,8 @@ const Action = ({
 }
 
 Action.propTypes = {
-  type: PropTypes.string,
+  active: PropTypes.bool,
+  type: PropTypes.number,
   index: PropTypes.number,
   image: PropTypes.string,
   altText: PropTypes.string,
