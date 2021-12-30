@@ -40,46 +40,17 @@ const ActionSet = ({
   const magicalRangedImages = ActionImages.MAGICAL_RANGED
   const itemImages = ActionImages.ITEM
 
-  const getPlayerActionIndex = (index) => {
-    if (!performedActions) return null
-
-    //  iterate over self and reduce the current index if a non-action is found
-    let performedActionIndex = index
-    for (let i = 0; i <= index; i++) {
-      const gAction = actions[i]
-
-      if (![ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(gAction.type)) {
-        performedActionIndex -= 1
-      }
-    }
-
-    const target = performedActions[performedActionIndex]
-    return { action: target, lastIndex: performedActionIndex }
-  }
-
   const nextGuidedActionFromIndex = (index) => {
     if (!guidingActions) return null
 
-    //  Iterate over guidingActions until index keeping a counter for applicable indices
-    let guidingActionIndex = 0
-    for (let i = 0; i < index; ++i) {
-      guidingActionIndex += 1
-      const gAction = guidingActions[i]
-      if (gAction) {
-        if (![ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(gAction.type)) {
-          guidingActionIndex += 1
-        }
-      }
+    //  Find the guided action with the matching executable index
+    const executableGuidingAction = guidingActions.find((a) => a.executableActionIndex === index)
+    const sameIndexAction = guidingActions[index]
+
+    return {
+      action: executableGuidingAction,
+      indexAction: sameIndexAction,
     }
-
-    let target = guidingActions[guidingActionIndex]
-
-    if (target && ![ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(target.type)) {
-      guidingActionIndex += 1
-      target = guidingActions[guidingActionIndex]
-    }
-
-    return { action: target, indexDiff: guidingActionIndex - index, index: guidingActionIndex }
   }
 
   let currentActionIndex = 0
@@ -96,9 +67,6 @@ const ActionSet = ({
     <Container type={type}>
       {
         (() => {
-          //  TODO: This does not scale
-          //  Checks if the pullbar has been accounted for in case of adding placeholders
-          let accountedForPullBar = false
           return actions.map((action, i) => {
             if (configuration.showLastNActions.enabled && i < currentActionIndex - MAX_PERFORMED_ACTIONS) return null
             if (configuration.showNextNActions.enabled && i > currentActionIndex + MAX_FUTURE_ACTIONS) return null
@@ -114,52 +82,63 @@ const ActionSet = ({
             if (guidingActions) {
               const guidedActionObject = nextGuidedActionFromIndex(i)
               guidedAction = guidedActionObject.action
-              includePlaceholder = !accountedForPullBar && guidedActionObject.indexDiff > 0
-              if (includePlaceholder) {
-                accountedForPullBar = true
+
+              const indexAction = guidedActionObject.indexAction
+              if (indexAction && indexAction.type === ACTION_TYPES.PULL) {
+                includePlaceholder = true
               }
             }
 
             if (guidedAction && guidedAction.name === action.name) {
               // Return fill-in Action
               return (
-                <>
+                <div style={{ display: 'inherit' }} key={`c-${i}`}>
+                  { includePlaceholder ? (
+                    <Action
+                      index={i}
+                      key={`p-${i}`}
+                    />
+                  ) : null }a
+                  <Action
+                    index={i}
+                    key={`s-${i}`}
+                  />
+                </div>
+              )
+            } else if (guidedAction && guidedAction.name !== action.name) {
+              //  Do not show the incorrect action
+              return (
+                <div style={{ display: 'inherit' }} key={`c-${i}`}>
                   { includePlaceholder ? (
                     <Action
                       index={i}
                       key={`p-${i}`}
                     />
                   ) : null }
-                  <Action
-                    index={i}
-                    key={`s-${i}`}
-                  />
-                </>
+                </div>
               )
-            } else if (guidedAction && guidedAction.name !== action.name) {
-              failedActionMatch = true
             }
 
             let successfulActionMatch = false
             let performedAction = null
             let isNextAction = false
             if (performedActions) {
-              const playerActionIndexObject = getPlayerActionIndex(i)
-              performedAction = playerActionIndexObject.action
+              performedAction = performedActions[action.executableActionIndex]
 
               //  If there is a matching performed action for the previous action
               //    But there is no performed action for this action
               //    then I am the next action
 
               if (!performedAction) {
-                const prevActionIndexObject = getPlayerActionIndex(i - 1)
-                if (prevActionIndexObject.action || i === 0) {
+                const prevAction = performedActions[action.executableActionIndex - 1]
+                if (prevAction || i === 0) {
                   isNextAction = true
                 }
               }
             }
 
             if (performedAction && performedAction.name === action.name) successfulActionMatch = true
+            else if (performedAction && performedAction.name !== action.name) failedActionMatch = true
 
             const formattedActionName = action.name.toLowerCase().replace(/ /g, '_')
             let actionType = 'job'

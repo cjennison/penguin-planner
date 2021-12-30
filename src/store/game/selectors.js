@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { ACTION_TYPES, JobIds } from '../../lib/IDConstants'
+import { ACTION_TYPES, EXECUTABLE_ACTION_TYPES, JobIds } from '../../lib/IDConstants'
 
 export const selectPlayerActions = createSelector(
     (state) => state.game,
@@ -25,11 +25,36 @@ export const selectPlanActions = createSelector(
     },
 )
 
-export const selectPlayerCompletedPlan = createSelector(
+export const selectDetailedTrackActions = createSelector(
     (state) => state.game,
+    selectPlanActions,
+    selectPlayerActions,
+    (game, planActions, playerActions) => {
+      let currentExecutableIndex = 0
+      const mappedPlanActions = planActions.map((action) => {
+        const newAction = {
+          ...action,
+          executableActionIndex: currentExecutableIndex,
+        }
+
+        if (EXECUTABLE_ACTION_TYPES.includes(action.type)) {
+          currentExecutableIndex += 1
+        }
+
+        return newAction
+      })
+
+      return {
+        plan: mappedPlanActions,
+        player: playerActions,
+      }
+    },
+)
+
+export const selectPlayerCompletedPlan = createSelector(
     selectPlayerActions,
     selectPlanActions,
-    (game, playerActions, planActions) => {
+    (playerActions, planActions) => {
       const clearedPlanActions = planActions.filter((action) => [ACTION_TYPES.oGCD, ACTION_TYPES.GCD, ACTION_TYPES.CONSUMABLE].includes(action.type))
       if (playerActions.length >= clearedPlanActions.length) return true
       return false

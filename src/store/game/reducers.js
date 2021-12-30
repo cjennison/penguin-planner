@@ -39,9 +39,9 @@ export const gameSlice = createSlice({
     },
 
     loadPlanActions: (state, action) => {
-      console.log(action)
       state.planActions = action.payload.actions
       state.planName = action.payload.planName
+      state.playerActions = []
     },
 
     clearPlanActions: (state) => {

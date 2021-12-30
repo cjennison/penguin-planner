@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Draggable from 'react-draggable'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { selectPlanActions, selectPlanName, selectPlayer, selectPlayerActions, selectPlayerJob, selectTrackState } from '../../store/game/selectors'
+import { selectDetailedTrackActions, selectPlanName, selectPlayer, selectPlayerJob, selectTrackState } from '../../store/game/selectors'
 
 import Tools from './Tools'
 import JobImage from '../../lib/JobImage'
@@ -66,8 +66,7 @@ const TitleContainer = styled.div`
 const Track = () => {
   const dispatch = useDispatch()
 
-  const playerActions = useSelector(selectPlayerActions)
-  const planActions = useSelector(selectPlanActions)
+  const actions = useSelector(selectDetailedTrackActions)
   const planName = useSelector(selectPlanName)
 
   const showTrack = useSelector(selectTrackState)
@@ -108,8 +107,8 @@ const Track = () => {
               <TrackBottom />
 
               <ActionContainer>
-                <ActionSet actions={planActions} performedActions={playerActions} type="plan" />
-                <ActionSet actions={playerActions} guidingActions={planActions} type="player" />
+                <ActionSet actions={actions.plan} performedActions={actions.player} type="plan" />
+                <ActionSet actions={actions.player} guidingActions={actions.plan} type="player" />
               </ActionContainer>
             </TrackContainer>
           </Draggable>
