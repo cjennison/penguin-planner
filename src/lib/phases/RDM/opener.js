@@ -37,6 +37,7 @@ opener.push({ name: 'Scorch', type: ACTION_TYPES.GCD })
 
 opener.push({ name: 'Resolution', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Verfire', type: ACTION_TYPES.GCD })
+opener.push({ name: 'Verthunder III', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Verstone', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Veraero III', type: ACTION_TYPES.GCD })
 opener.push({ name: 'Jolt II', type: ACTION_TYPES.GCD })
