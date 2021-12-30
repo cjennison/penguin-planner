@@ -39,7 +39,7 @@
 .glow {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 1%;
   background-color: #fff;
   -webkit-animation: glowing 1s ease-in-out infinite alternate;
   -moz-animation: glowing 1s ease-in-out infinite alternate;
@@ -48,9 +48,9 @@
 
 @keyframes glowing {
   from {
-    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #f0f, 0 0 20px #0ff, 0 0 25px #e60073, 0 0 30px #e60073, 0 0 35px #e60073;
+    box-shadow: 0px 0px 5px 2px #99d9dd;
   }
   to {
-    box-shadow: 0 0 10px #fff, 0 0 15px #ff4da6, 0 0 20px #ff4da6, 0 0 25px #ff4da6, 0 0 30px #ff4da6, 0 0 35px #ff4da6, 0 0 40px #ff4da6;
+    box-shadow: 0px 0px 10px 5px #99d9dd;
   }
 }

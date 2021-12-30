@@ -42,6 +42,8 @@ const TrackBottom = styled.div`
 `
 
 const ImageContainer = styled.div`
+  padding-left: 5px;
+  margin-top: 5px;
 `
 
 const ActionContainer = styled.div`
@@ -96,10 +98,10 @@ const Track = () => {
               <ItemResizer enabled={editMode} />
 
               <TitleContainer>
+                <TextContainer>{planName}</TextContainer>
                 <ImageContainer>
                   { currentJobImage ? (<img src={currentJobImage} alt={JobIds[player.Job]} width="35" />) : null }
                 </ImageContainer>
-                <TextContainer>{planName}</TextContainer>
               </TitleContainer>
 
 
