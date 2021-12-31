@@ -147,7 +147,7 @@ const Configuration = ({
                       max={20}
                       value={configuration.showNextNActions.num}
                       onChange={(e, value) => {
-                        dispatch(setConfiguration({ configuration: { showNextNActions: { ...configuration.showLastNActions, num: value }}}))
+                        dispatch(setConfiguration({ configuration: { showNextNActions: { ...configuration.showNextNActions, num: value }}}))
                       }}
                     />
 

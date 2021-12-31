@@ -9,8 +9,8 @@ export const systemSlice = createSlice({
     track: {
       x: 0,
       y: 0,
-      width: 400,
-      height: 200,
+      width: 1000,
+      height: 135,
     },
     toolbar: {
       x: 0,

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Draggable from 'react-draggable'
+import { Resizable } from 're-resizable'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { selectDetailedTrackActions, selectPlanName, selectPlayer, selectPlayerJob, selectTrackState } from '../../store/game/selectors'
@@ -13,6 +14,8 @@ import SupportedJobs from '../../lib/SupportedJobs'
 import { selectEditMode, selectTrackWindowState } from '../../store/system/selectors'
 import ItemResizer from './ItemResizer'
 import { setTrackState } from '../../store/system/reducers'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignal } from '@fortawesome/free-solid-svg-icons'
 
 const ListContainer = styled.div`
   height: 100vh;
@@ -25,8 +28,8 @@ const TrackContainer = styled.div`
     }
   }}
 
-  height: 135px;
-  width: 1000px;
+  height: ${(props) => props.trackState.height}px;
+  width: ${(props) => props.trackState.width}px;
   background: rgba(0, 0, 0, 0.3);
 `
 
@@ -34,11 +37,11 @@ const TrackTop = styled.div`
   margin-top: 70px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-  height: 65px;
+  height: 50%;
 `
 const TrackBottom = styled.div`
   border-bottom: 1px solid white;
-  height: 65px;
+  height: 50%;
 `
 
 const ImageContainer = styled.div`
@@ -48,8 +51,18 @@ const ImageContainer = styled.div`
 
 const ActionContainer = styled.div`
   position: absolute;
-  margin-left: 10px;
-  margin-top: -85px;
+  left: 0;
+  top: 0;
+
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  &> div {
+    left: 10px;
+    top: ${(props) => props.height/2}px;
+    margin-top: -25px;
+  }
 `
 
 const TextContainer = styled.div`
@@ -63,6 +76,16 @@ const TitleContainer = styled.div`
   position: absolute;
   top: -10px;
   right: 0;
+`
+
+const ResizeHandle = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+
+  right: 10px;
+  bottom: 10px;
+  color: white;
 `
 
 const Track = () => {
@@ -85,7 +108,7 @@ const Track = () => {
     <ListContainer>
       <Tools />
       {
-        jobSupported ? (
+        jobSupported || true ? (
           <Draggable
             bounds="parent"
             disabled={!editMode}
@@ -94,25 +117,55 @@ const Track = () => {
               dispatch(setTrackState({ track: { x: d.x, y: d.y }}))
             }}
           >
-            <TrackContainer showTrack={showTrack}>
-              <ItemResizer enabled={editMode} />
+            <Resizable
+              enable={{ bottom: false, top: false, bottomRight: !editMode }}
+              size={{
+                height: trackWindowState.height,
+                width: trackWindowState.width,
+              }}
+              minHeight={100}
+              maxHeight={500}
+              minWidth={300}
+              maxWidth={2500}
 
-              <TitleContainer>
-                <TextContainer>{planName}</TextContainer>
-                <ImageContainer>
-                  { currentJobImage ? (<img src={currentJobImage} alt={JobIds[player.Job]} width="35" />) : null }
-                </ImageContainer>
-              </TitleContainer>
+              onResize={(e, dir, ref, d) => {
+                const refBound = ref.getBoundingClientRect()
+                dispatch(setTrackState({
+                  track: {
+                    width: refBound.width,
+                    height: refBound.height,
+                  },
+                }))
+              }}
+            >
+              <TrackContainer className="" trackState={trackWindowState} showTrack={showTrack}>
+                <ItemResizer enabled={editMode} />
+
+                <TitleContainer>
+                  <TextContainer>{planName}</TextContainer>
+                  <ImageContainer>
+                    { currentJobImage ? (<img src={currentJobImage} alt={JobIds[player.Job]} width="35" />) : null }
+                  </ImageContainer>
+                </TitleContainer>
 
 
-              <TrackTop />
-              <TrackBottom />
+                <TrackTop />
+                <TrackBottom />
 
-              <ActionContainer>
-                <ActionSet actions={actions.plan} performedActions={actions.player} type="plan" />
-                <ActionSet actions={actions.player} guidingActions={actions.plan} type="player" />
-              </ActionContainer>
-            </TrackContainer>
+                <ActionContainer height={trackWindowState.height}>
+                  <ActionSet actions={actions.plan} performedActions={actions.player} type="plan" />
+                  <ActionSet actions={actions.player} guidingActions={actions.plan} type="player" />
+                </ActionContainer>
+                {
+                  !editMode ? (
+                    <ResizeHandle>
+                      <FontAwesomeIcon icon={faSignal} />
+                    </ResizeHandle>
+                  ) : null
+                }
+
+              </TrackContainer>
+            </Resizable>
           </Draggable>
         ) : null
       }
