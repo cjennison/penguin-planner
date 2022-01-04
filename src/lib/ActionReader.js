@@ -30,6 +30,9 @@ class ActionReader {
   readLine(logLine) {
     const actionLine = logLine.line[4]
     let actionMatch = null
+    if (actionLine.includes('You change to')) {
+      location.reload()
+    }
     ActionMatches.forEach((actionMatcher) => {
       const re = new RegExp(actionMatcher.matchRegex)
       const successfulActionMatch = re.test(actionLine)
