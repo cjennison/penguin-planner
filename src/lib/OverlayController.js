@@ -27,10 +27,27 @@ const OverlayController = () => {
     }
   }, [playerActions])
 
+  const getCurrentPlayer = () => {
+    window.callOverlayHandler({ call: 'getCombatants' }).then((data) => {
+      const player = data.combatants[0]
+      if (player && player.Name) {
+        console.log('Loaded Player', player)
+        dispatch(getPlayerFulfilled({ player: player }))
+      }
+    })
+  }
+
   useEffect(() => {
     //  Attach to OverlayPlugin
     document.addEventListener('onLogLine', (e) => {
       const result = ActionReader.readLine(e.detail)
+
+      if (result.type === 'CHANGE_JOB') {
+        getCurrentPlayer()
+        dispatch(clearPlanActions())
+        dispatch(clearPlayerActions())
+      }
+
       if (result.isValidAction) {
         dispatch(addPlayerAction({ action: result.action }))
       }
@@ -61,13 +78,7 @@ const OverlayController = () => {
       console.log('onPartyChange', e)
     })
 
-    window.callOverlayHandler({ call: 'getCombatants' }).then((data) => {
-      const player = data.combatants[0]
-      if (player && player.Name) {
-        console.log('Loaded Player', player)
-        dispatch(getPlayerFulfilled({ player: player }))
-      }
-    })
+    getCurrentPlayer()
   }, [])
 
   return null

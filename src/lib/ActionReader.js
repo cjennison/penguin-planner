@@ -31,7 +31,9 @@ class ActionReader {
     const actionLine = logLine.line[4]
     let actionMatch = null
     if (actionLine.includes('You change to')) {
-      location.reload()
+      return {
+        type: 'CHANGE_JOB',
+      }
     }
     ActionMatches.forEach((actionMatcher) => {
       const re = new RegExp(actionMatcher.matchRegex)
