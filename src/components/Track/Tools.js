@@ -90,8 +90,6 @@ const Tools = () => {
 
                     const opener = PHASES[playerJob].OPENER
 
-                    console.log(opener, playerJob)
-
                     dispatch(loadPlanActions({ actions: opener, planName: 'opener' }))
                     dispatch(showTrack())
                   }}
