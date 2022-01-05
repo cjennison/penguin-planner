@@ -9,6 +9,7 @@ export const JobIds = {
   27: 'SMN',
   28: 'SCH',
   30: 'NIN',
+  31: 'MCH',
   32: 'DRK',
   33: 'AST',
   34: 'MCH',

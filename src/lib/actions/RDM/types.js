@@ -22,7 +22,7 @@ const RDMActionTypes = {
   'Veraero III': ACTION_TYPES.GCD,
   'Enchanted Riposte': ACTION_TYPES.GCD,
   'Enchanted Zwerchhau': ACTION_TYPES.GCD,
-  'Enchanted redoublement': ACTION_TYPES.GCD,
+  'Enchanted Redoublement': ACTION_TYPES.GCD,
   'Enchanted Moulinet': ACTION_TYPES.GCD,
   'Enchanted Reprise': ACTION_TYPES.GCD,
   'Scorch': ACTION_TYPES.GCD,

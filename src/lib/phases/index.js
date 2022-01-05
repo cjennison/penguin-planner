@@ -1,6 +1,7 @@
 import BLMOpener from './BLM/opener'
 import RDMOpener from './RDM/opener'
 import RPROpener from './RPR/opener'
+import MCHOpener from './MCH/opener'
 
 const PHASES = {
   BLM: {
@@ -11,6 +12,9 @@ const PHASES = {
   },
   RPR: {
     OPENER: RPROpener,
+  },
+  MCH: {
+    OPENER: MCHOpener,
   },
 }
 
