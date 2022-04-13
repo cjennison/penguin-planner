@@ -11,6 +11,14 @@ export const MagicalRangedActions = [
   'Sleep',
 ]
 
+export const MeleeActions = [
+  'True North',
+  'Second Wind',
+  'Bloodbath',
+  'Feint',
+  'Leg Sweep',
+]
+
 export const ItemActions = [
   'Tincture of Intelligence',
   'Tincture of Mind',

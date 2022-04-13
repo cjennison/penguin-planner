@@ -3,6 +3,7 @@ import { ACTION_TYPES } from './IDConstants'
 import BLMActionTypes from './actions/BLM/types'
 import RDMActionTypes from './actions/RDM/types'
 import MCHActionTypes, { MCHIgnoreActions } from './actions/MCH/types'
+import MNKActionTypes from './actions/MNK/types'
 
 const UniversalActions = {
   'Sprint': ACTION_TYPES.oGCD,
@@ -30,13 +31,24 @@ const PhysicalRangedActions = {
   'Arm\'s Length': ACTION_TYPES.oGCD,
 }
 
+const MeleeActions = {
+  'True North': ACTION_TYPES.oGCD,
+  'Second Wind': ACTION_TYPES.oGCD,
+  'Bloodbath': ACTION_TYPES.oGCD,
+  'Feint': ACTION_TYPES.oGCD,
+  'Leg Sweep': ACTION_TYPES.oGCD,
+  'Arm\'s Length': ACTION_TYPES.oGCD,
+}
+
 const ActionTypeIDs = {
   ...UniversalActions,
   ...MagicalRangedActions,
   ...PhysicalRangedActions,
+  ...MeleeActions,
   ...BLMActionTypes,
   ...RDMActionTypes,
   ...MCHActionTypes,
+  ...MNKActionTypes,
 }
 
 const IgnoredActionTypeIDs = [

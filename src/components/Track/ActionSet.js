@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import Action from './Action'
 import { selectConfiguration, selectPlayer, selectPlayerJob } from '../../store/game/selectors'
 import ActionImages from '../../lib/ActionImages'
-import { MagicalRangedActions, UniversalActions, ItemActions } from '../../lib/ActionSpecifications'
+import { MagicalRangedActions, UniversalActions, ItemActions, MeleeActions } from '../../lib/ActionSpecifications'
 import { ACTION_TYPES } from '../../lib/IDConstants'
 import Pullbar from './Pullbar'
 
@@ -38,6 +38,7 @@ const ActionSet = ({
 
   const actionImages = player ? ActionImages[playerJob] : {}
   const magicalRangedImages = ActionImages.MAGICAL_RANGED
+  const meleeImages = ActionImages.MELEE
   const itemImages = ActionImages.ITEM
 
   const nextGuidedActionFromIndex = (index) => {
@@ -146,6 +147,10 @@ const ActionSet = ({
               actionType = 'magicalRanged'
             }
 
+            if (MeleeActions.includes(action.name)) {
+              actionType = 'melee'
+            }
+
             if (UniversalActions.includes(action.name)) {
               actionType = 'universal'
             }
@@ -162,6 +167,9 @@ const ActionSet = ({
               case 'magicalRanged':
                 image = magicalRangedImages[`${formattedActionName}.png`]
                 break
+              case 'melee':
+                image = meleeImages[`${formattedActionName}.png`]
+                break
               case 'item':
                 image = itemImages[`${formattedActionName}.png`]
                 break
@@ -172,7 +180,7 @@ const ActionSet = ({
 
             if (!image) {
               image = ActionImages.MISSING_ACTION
-              console.warn('missing action', formattedActionName)
+              console.warn('missing action', formattedActionName, action.name)
             }
 
             let displayType = action.type
