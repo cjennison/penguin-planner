@@ -4,6 +4,7 @@ import BLMActionTypes from './actions/BLM/types'
 import RDMActionTypes from './actions/RDM/types'
 import MCHActionTypes, { MCHIgnoreActions } from './actions/MCH/types'
 import MNKActionTypes from './actions/MNK/types'
+import DRKActionTypes, { DRKIgnoreActions } from './actions/DRK/types'
 
 const UniversalActions = {
   'Sprint': ACTION_TYPES.oGCD,
@@ -40,6 +41,10 @@ const MeleeActions = {
   'Arm\'s Length': ACTION_TYPES.oGCD,
 }
 
+const TankActions = {
+  'Provoke': ACTION_TYPES.oGCD,
+}
+
 const ActionTypeIDs = {
   ...UniversalActions,
   ...MagicalRangedActions,
@@ -49,10 +54,13 @@ const ActionTypeIDs = {
   ...RDMActionTypes,
   ...MCHActionTypes,
   ...MNKActionTypes,
+  ...DRKActionTypes,
+  ...TankActions,
 }
 
 const IgnoredActionTypeIDs = [
   ...MCHIgnoreActions,
+  ...DRKIgnoreActions,
 ]
 
 export default ActionTypeIDs

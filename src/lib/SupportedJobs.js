@@ -5,6 +5,7 @@ const SupportedJobs = {
   RPR: true,
   MCH: true,
   MNK: true,
+  DRK: true,
 }
 
 export default SupportedJobs

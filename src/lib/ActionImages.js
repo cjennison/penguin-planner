@@ -12,6 +12,7 @@ const BLMImages = importAll(require.context('../images/ffxiv/icons/BLM', false, 
 const RPRImages = importAll(require.context('../images/ffxiv/icons/RPR', false, /\.(png|jpe?g|svg)$/))
 const MCHImages = importAll(require.context('../images/ffxiv/icons/MCH', false, /\.(png|jpe?g|svg)$/))
 const MNKImages = importAll(require.context('../images/ffxiv/icons/MNK', false, /\.(png|jpe?g|svg)$/))
+const DRKImages = importAll(require.context('../images/ffxiv/icons/DRK', false, /\.(png|jpe?g|svg)$/))
 
 const TankActions = importAll(require.context('../images/ffxiv/icons/ROLE_ACTIONS/Tank', false, /\.(png|jpe?g|svg)$/))
 const MeleeActions = importAll(require.context('../images/ffxiv/icons/ROLE_ACTIONS/Melee', false, /\.(png|jpe?g|svg)$/))
@@ -26,6 +27,7 @@ const ActionImages = {
   RPR: RPRImages,
   MCH: MCHImages,
   MNK: MNKImages,
+  DRK: DRKImages,
 
   TANK: TankActions,
   MELEE: MeleeActions,

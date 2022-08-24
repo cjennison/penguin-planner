@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import Action from './Action'
 import { selectConfiguration, selectPlayer, selectPlayerJob } from '../../store/game/selectors'
 import ActionImages from '../../lib/ActionImages'
-import { MagicalRangedActions, UniversalActions, ItemActions, MeleeActions } from '../../lib/ActionSpecifications'
+import { MagicalRangedActions, UniversalActions, ItemActions, MeleeActions, TankActions } from '../../lib/ActionSpecifications'
 import { ACTION_TYPES } from '../../lib/IDConstants'
 import Pullbar from './Pullbar'
 
@@ -40,6 +40,7 @@ const ActionSet = ({
   const magicalRangedImages = ActionImages.MAGICAL_RANGED
   const meleeImages = ActionImages.MELEE
   const itemImages = ActionImages.ITEM
+  const tankImages = ActionImages.TANK
 
   const nextGuidedActionFromIndex = (index) => {
     if (!guidingActions) return null
@@ -159,6 +160,10 @@ const ActionSet = ({
               actionType = 'item'
             }
 
+            if (TankActions.includes(action.name)) {
+              actionType = 'item'
+            }
+
             let image = null
             switch (actionType) {
               case 'job':
@@ -172,6 +177,9 @@ const ActionSet = ({
                 break
               case 'item':
                 image = itemImages[`${formattedActionName}.png`]
+                break
+              case 'tank':
+                image = tankImages[`${formattedActionName}.png`]
                 break
               case 'universal':
               default:

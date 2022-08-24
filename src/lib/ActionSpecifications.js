@@ -26,3 +26,5 @@ export const ItemActions = [
   'Tincture of Dexterity',
   'Orange Juice',
 ]
+
+export const TankActions = []
