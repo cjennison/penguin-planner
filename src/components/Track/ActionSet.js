@@ -161,7 +161,7 @@ const ActionSet = ({
             }
 
             if (TankActions.includes(action.name)) {
-              actionType = 'item'
+              actionType = 'tank'
             }
 
             let image = null

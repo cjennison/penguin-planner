@@ -43,7 +43,7 @@ const Tools = () => {
   if (clickthroughEnabled) return null
 
   const configOpen = Boolean(configAnchorEl)
-
+  console.log(playerJob, PHASES)
   return (
     <>
       <Draggable
@@ -89,7 +89,7 @@ const Tools = () => {
                     if (!jobPhases) return
 
                     const opener = PHASES[playerJob].OPENER
-
+                    console.log(opener)
                     dispatch(loadPlanActions({ actions: opener, planName: 'opener' }))
                     dispatch(showTrack())
                   }}

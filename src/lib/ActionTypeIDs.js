@@ -42,7 +42,13 @@ const MeleeActions = {
 }
 
 const TankActions = {
+  'Rampart': ACTION_TYPES.oGCD,
+  'Low Blow': ACTION_TYPES.oGCD,
   'Provoke': ACTION_TYPES.oGCD,
+  'Interject': ACTION_TYPES.oGCD,
+  'Reprisal': ACTION_TYPES.oGCD,
+  'Arm\'s Length': ACTION_TYPES.oGCD,
+  'Shirk': ACTION_TYPES.oGCD,
 }
 
 const ActionTypeIDs = {

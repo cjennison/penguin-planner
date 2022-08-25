@@ -22,7 +22,7 @@ const PHASES = {
     OPENER: MNKOpener,
   },
   DRK: {
-    DRKOpener: DRKOpener,
+    OPENER: DRKOpener,
   },
 }
 

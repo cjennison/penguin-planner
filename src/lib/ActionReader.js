@@ -64,7 +64,7 @@ class ActionReader {
         }
       }
     })
-
+    console.log(actionMatch)
     const action = { name: actionMatch, type: ActionTypeIDs[actionMatch] }
 
     return {

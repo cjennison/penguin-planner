@@ -27,4 +27,12 @@ export const ItemActions = [
   'Orange Juice',
 ]
 
-export const TankActions = []
+export const TankActions = [
+  'Rampart',
+  'Low Blow',
+  'Provoke',
+  'Interject',
+  'Reprisal',
+  'Arm\'s Length',
+  'Shirk',
+]

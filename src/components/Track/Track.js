@@ -138,8 +138,8 @@ const Track = () => {
                 }))
               }}
             >
+              <ItemResizer enabled={editMode} />
               <TrackContainer className="" trackState={trackWindowState} showTrack={showTrack}>
-                <ItemResizer enabled={editMode} />
 
                 <TitleContainer>
                   <TextContainer>{planName}</TextContainer>
